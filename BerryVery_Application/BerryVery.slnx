@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="BerryDevice/BerryDevice.csproj" Id="24e00a19-9b83-43ee-b390-374b16894ce8" />
+  <Project Path="BerryMessenger/BerryMessenger.csproj" />
+  <Project Path="BerryOperator/BerryOperator.csproj" Id="7b5147c1-2dc0-48c5-a3ec-a7dada1dc06e" />
+  <Project Path="BerrySchedule/BerrySchedule.csproj" Id="46330688-b58b-4624-af4a-2dfc140dc9ed" />
+</Solution>
