@@ -26,23 +26,7 @@ namespace BerryMessenger
                 DataContext = vm
             };
 
-            Converters.Packet.ToData();
-
             window.Show();
         }
     }
-
-    public class Converters
-    {
-        public static ConvPacket Packet => new ConvPacket();
-    }
-
-    public class ConvPacket
-    {
-        public object ToData()
-        {
-            return new object();
-        }
-    }
-
 }

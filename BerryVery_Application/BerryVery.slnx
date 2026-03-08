@@ -1,6 +1,8 @@
 <Solution>
+  <Project Path="BerryClass/BerryClass.csproj" Id="a50fffc8-5f4e-4d1b-9e6c-c6dbddc8a134" />
   <Project Path="BerryDevice/BerryDevice.csproj" Id="24e00a19-9b83-43ee-b390-374b16894ce8" />
   <Project Path="BerryMessenger/BerryMessenger.csproj" />
   <Project Path="BerryOperator/BerryOperator.csproj" Id="7b5147c1-2dc0-48c5-a3ec-a7dada1dc06e" />
   <Project Path="BerrySchedule/BerrySchedule.csproj" Id="46330688-b58b-4624-af4a-2dfc140dc9ed" />
+  <Project Path="BerryTest/BerryTest.csproj" Id="bff5363e-d7d0-4e6e-ac1f-6cb4e35e9e5e" />
 </Solution>

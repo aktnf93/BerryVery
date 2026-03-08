@@ -40,3 +40,7 @@ C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryMessenger\o
 C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryMessenger\obj\Debug\net10.0-windows\BerryMessenger.pdb
 C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryMessenger\obj\Debug\net10.0-windows\BerryMessenger.genruntimeconfig.cache
 C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryMessenger\obj\Debug\net10.0-windows\ref\BerryMessenger.dll
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryMessenger\bin\Debug\net10.0-windows\BerryClass.dll
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryMessenger\bin\Debug\net10.0-windows\BerryClass.pdb
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryMessenger\obj\Debug\net10.0-windows\BerryMessenger.csproj.AssemblyReference.cache
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryMessenger\obj\Debug\net10.0-windows\BerryMes.966B4CFF.Up2Date

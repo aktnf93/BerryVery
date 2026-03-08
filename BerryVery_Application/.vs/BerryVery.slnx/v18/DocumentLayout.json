@@ -3,28 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{46330688-B58B-4624-AF4A-2DFC140DC9ED}|BerrySchedule\\BerrySchedule.csproj|c:\\users\\a\\source\\repos\\git_ksh_berryvery\\berryvery_application\\berryschedule\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{46330688-B58B-4624-AF4A-2DFC140DC9ED}|BerrySchedule\\BerrySchedule.csproj|solutionrelative:berryschedule\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{A50FFFC8-5F4E-4D1B-9E6C-C6DBDDC8A134}|BerryClass\\BerryClass.csproj|c:\\users\\a\\source\\repos\\git_ksh_berryvery\\berryvery_application\\berryclass\\services\\s_database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A50FFFC8-5F4E-4D1B-9E6C-C6DBDDC8A134}|BerryClass\\BerryClass.csproj|solutionrelative:berryclass\\services\\s_database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{46330688-B58B-4624-AF4A-2DFC140DC9ED}|BerrySchedule\\BerrySchedule.csproj|c:\\users\\a\\source\\repos\\git_ksh_berryvery\\berryvery_application\\berryschedule\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46330688-B58B-4624-AF4A-2DFC140DC9ED}|BerrySchedule\\BerrySchedule.csproj|solutionrelative:berryschedule\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A50FFFC8-5F4E-4D1B-9E6C-C6DBDDC8A134}|BerryClass\\BerryClass.csproj|c:\\users\\a\\source\\repos\\git_ksh_berryvery\\berryvery_application\\berryclass\\services\\s_serialport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A50FFFC8-5F4E-4D1B-9E6C-C6DBDDC8A134}|BerryClass\\BerryClass.csproj|solutionrelative:berryclass\\services\\s_serialport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7B5147C1-2DC0-48C5-A3EC-A7DADA1DC06E}|BerryOperator\\BerryOperator.csproj|c:\\users\\a\\source\\repos\\git_ksh_berryvery\\berryvery_application\\berryoperator\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7B5147C1-2DC0-48C5-A3EC-A7DADA1DC06E}|BerryOperator\\BerryOperator.csproj|solutionrelative:berryoperator\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7B5147C1-2DC0-48C5-A3EC-A7DADA1DC06E}|BerryOperator\\BerryOperator.csproj|c:\\users\\a\\source\\repos\\git_ksh_berryvery\\berryvery_application\\berryoperator\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7B5147C1-2DC0-48C5-A3EC-A7DADA1DC06E}|BerryOperator\\BerryOperator.csproj|solutionrelative:berryoperator\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24E00A19-9B83-43EE-B390-374B16894CE8}|BerryDevice\\BerryDevice.csproj|c:\\users\\a\\source\\repos\\git_ksh_berryvery\\berryvery_application\\berrydevice\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{24E00A19-9B83-43EE-B390-374B16894CE8}|BerryDevice\\BerryDevice.csproj|solutionrelative:berrydevice\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24E00A19-9B83-43EE-B390-374B16894CE8}|BerryDevice\\BerryDevice.csproj|c:\\users\\a\\source\\repos\\git_ksh_berryvery\\berryvery_application\\berrydevice\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24E00A19-9B83-43EE-B390-374B16894CE8}|BerryDevice\\BerryDevice.csproj|solutionrelative:berrydevice\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A50FFFC8-5F4E-4D1B-9E6C-C6DBDDC8A134}|BerryClass\\BerryClass.csproj|c:\\users\\a\\source\\repos\\git_ksh_berryvery\\berryvery_application\\berryclass\\services\\icommservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A50FFFC8-5F4E-4D1B-9E6C-C6DBDDC8A134}|BerryClass\\BerryClass.csproj|solutionrelative:berryclass\\services\\icommservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,82 +21,50 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 258,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerrySchedule\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "BerrySchedule\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerrySchedule\\MainWindow.xaml",
-              "RelativeToolTip": "BerrySchedule\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-04T02:05:24.452Z",
+              "DocumentIndex": 1,
+              "Title": "S_SerialPort.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryClass\\Services\\S_SerialPort.cs",
+              "RelativeDocumentMoniker": "BerryClass\\Services\\S_SerialPort.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryClass\\Services\\S_SerialPort.cs",
+              "RelativeToolTip": "BerryClass\\Services\\S_SerialPort.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwGMAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-05T07:18:35.878Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerrySchedule\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "BerrySchedule\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerrySchedule\\MainWindow.xaml.cs",
-              "RelativeToolTip": "BerrySchedule\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T02:05:24.371Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c6f34f0d-7ae5-4f3a-be61-fe0c21ae9eb8}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryOperator\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "BerryOperator\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryOperator\\MainWindow.xaml",
-              "RelativeToolTip": "BerryOperator\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-04T02:05:06.532Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryOperator\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "BerryOperator\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryOperator\\MainWindow.xaml.cs",
-              "RelativeToolTip": "BerryOperator\\MainWindow.xaml.cs",
+              "Title": "ICommService.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryClass\\Services\\ICommService.cs",
+              "RelativeDocumentMoniker": "BerryClass\\Services\\ICommService.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryClass\\Services\\ICommService.cs",
+              "RelativeToolTip": "BerryClass\\Services\\ICommService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T02:05:06.429Z",
+              "WhenOpened": "2026-03-05T06:02:37.497Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryDevice\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "BerryDevice\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryDevice\\MainWindow.xaml",
-              "RelativeToolTip": "BerryDevice\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-04T02:02:08.27Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryDevice\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "BerryDevice\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryDevice\\MainWindow.xaml.cs",
-              "RelativeToolTip": "BerryDevice\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "S_Database.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryClass\\Services\\S_Database.cs",
+              "RelativeDocumentMoniker": "BerryClass\\Services\\S_Database.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\Git_KSH_BerryVery\\BerryVery_Application\\BerryClass\\Services\\S_Database.cs",
+              "RelativeToolTip": "BerryClass\\Services\\S_Database.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T02:02:07.752Z",
+              "WhenOpened": "2026-03-05T06:02:30.744Z",
               "EditorCaption": ""
             }
           ]

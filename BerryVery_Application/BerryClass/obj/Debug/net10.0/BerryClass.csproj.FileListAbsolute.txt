@@ -1,0 +1,13 @@
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\bin\Debug\net10.0\BerryClass.deps.json
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\bin\Debug\net10.0\BerryClass.dll
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\bin\Debug\net10.0\BerryClass.pdb
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\obj\Debug\net10.0\BerryClass.csproj.AssemblyReference.cache
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\obj\Debug\net10.0\BerryClass.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\obj\Debug\net10.0\BerryClass.AssemblyInfoInputs.cache
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\obj\Debug\net10.0\BerryClass.AssemblyInfo.cs
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\obj\Debug\net10.0\BerryClass.csproj.CoreCompileInputs.cache
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\obj\Debug\net10.0\BerryClass.sourcelink.json
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\obj\Debug\net10.0\BerryClass.dll
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\obj\Debug\net10.0\refint\BerryClass.dll
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\obj\Debug\net10.0\BerryClass.pdb
+C:\Users\A\source\repos\Git_KSH_BerryVery\BerryVery_Application\BerryClass\obj\Debug\net10.0\ref\BerryClass.dll

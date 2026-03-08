@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using BerryDevice.ViewModels;
+using BerryDevice.Views;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -9,6 +11,23 @@ namespace BerryDevice
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            var vm = new VM_MainWindow();
+            var window = new V_MainWindow
+            {
+                DataContext = vm
+            };
+
+            window.Show();
+        }
     }
 
 }

@@ -49,19 +49,33 @@ BerryDevice
 BerrySchedule
 BerryMessenger
 BerryOperator
+
+
+	Resources
+	Views
+	ViewModels
+	Models
+	Services
+	Channels
+	Domain
+	Converters
+	Common
+
+
 {
 	Resources
 		Styles
 		Images
 	
 	Views : 화면
-		V_...
+		V_MainWindow
 		
 	ViewModels : 화면 처리 객체
-		VM_...
+		VM_MainWindow
 		
 	Models : 화면 데이터 모델
-		M_...
+		M_RoomInfo
+		M_RoomStatus
 		
 	Services : 통신
 		S_SocketServer
@@ -71,27 +85,27 @@ BerryOperator
 		S_Database
 		S_HttpServer
 		S_HttpClient
+		S_SerialPort
 		
 	Channels : 통신 처리 객체
-		ChannelDevice
-		ChannelMessenger
-		ChannelDatabase
-		ChannelInterface
+		C_Device
+		C_Messenger
+		C_Database
+		C_Interface
 		
 	Domain : 통신 데이터 모델
-		D_...
+		D_RoomData
 		
 	Converters : 데이터 변환
-		Converters
-			ConvPacket
-			ConvQuery
-			ConvMessage
-			ConvModel
+		Conv_Packet
+		Conv_Query
+		Conv_Message
+		Conv_Model
 
 	Common : 공통 로직
-		Config
-		Notify
-		Logger
-		Command
+		Cm_Config
+		Cm_Notify
+		Cm_Logger
+		Cm_Command
 }
 end
