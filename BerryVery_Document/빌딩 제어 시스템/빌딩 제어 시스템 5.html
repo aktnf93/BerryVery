@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>모니터링 - 사무실/객실</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Style */
+        .slide-header {
+            height: 120px;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            background: #ffffff;
+            z-index: 10;
+        }
+        .header-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header-number {
+            color: #2F6FED;
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            padding: 40px 80px;
+            gap: 50px;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        /* Left: UI Mockup */
+        .ui-mockup-wrapper {
+            flex: 2.2; /* Slightly wider for detailed view */
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 8px solid #374151; /* Monitor Bezel */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .app-bar {
+            height: 50px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .main-layout {
+            flex: 1;
+            display: flex;
+            background: #f3f4f6;
+            overflow: hidden;
+        }
+
+        /* Navigation Sidebar */
+        .sidebar {
+            width: 60px; /* Collapsed view */
+            background: #1f2937;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+            gap: 15px;
+            z-index: 20;
+        }
+        .sidebar-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sidebar-icon:hover { background: #374151; color: white; }
+        .sidebar-icon.active { background: #2F6FED; color: white; }
+
+        /* Secondary Tree Sidebar */
+        .tree-sidebar {
+            width: 220px;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+        }
+        .tree-header {
+            padding: 15px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .search-box {
+            background: #f3f4f6;
+            border-radius: 4px;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .tree-content {
+            padding: 10px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .tree-item {
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #4b5563;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .tree-item:hover { background: #f3f4f6; }
+        .tree-item.selected { background: #eff6ff; color: #2F6FED; font-weight: 600; }
+        .tree-indent { margin-left: 20px; }
+
+        /* Main Content Grid */
+        .detail-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #f9fafb;
+            position: relative;
+        }
+        .filter-bar {
+            padding: 15px 20px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-grid {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            overflow-y: auto;
+        }
+
+        /* Room Card */
+        .room-card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .room-card:hover {
+            border-color: #2F6FED;
+            box-shadow: 0 4px 6px rgba(47, 111, 237, 0.1);
+        }
+        .room-card.alert { border-left: 4px solid #E5484D; }
+        .room-header {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .room-body {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mini-chart {
+            height: 40px;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        /* Right Drawer */
+        .detail-drawer {
+            width: 280px;
+            background: white;
+            border-left: 1px solid #e5e7eb;
+            box-shadow: -4px 0 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            z-index: 30;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+        .drawer-header {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+        .drawer-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .info-group {
+            margin-bottom: 24px;
+        }
+        .info-label {
+            font-size: 11px;
+            color: #6b7280;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .info-value {
+            font-size: 14px;
+            color: #111827;
+            font-weight: 500;
+        }
+
+        /* Callout Markers */
+        .callout {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: #E5484D;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            z-index: 50;
+        }
+
+        /* Right: Description */
+        .desc-panel {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .desc-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .desc-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .desc-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .desc-item {
+            display: flex;
+            gap: 12px;
+            align-items: start;
+        }
+        .desc-num {
+            width: 24px;
+            height: 24px;
+            background: #fee2e2;
+            color: #E5484D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .scenario-box {
+            background: #eff6ff;
+            border-left: 4px solid #2F6FED;
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+        }
+        .scenario-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #374151;
+        }
+        .step-arrow { color: #9ca3af; font-size: 12px; }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header -->
+<header class="slide-header">
+<div class="header-title">
+<span class="header-number">05</span>
+<span>모니터링 — 사무실/객실</span>
+</div>
+<div class="text-right">
+<p class="text-gray-500 text-sm font-medium">Building Control System UI Project</p>
+<p class="text-gray-400 text-xs">Page 05 / 15</p>
+</div>
+</header>
+<!-- Main Content -->
+<div class="content-area">
+<!-- Left: UI Mockup -->
+<div class="ui-mockup-wrapper">
+<!-- App Bar -->
+<div class="app-bar">
+<div class="flex items-center gap-4">
+<i class="fas fa-bars text-gray-500"></i>
+<span class="font-bold text-lg text-blue-600">BMS <span class="text-gray-600 font-normal text-sm">| Twin Tower A</span></span>
+</div>
+<div class="flex items-center gap-4 text-gray-500 text-sm">
+<span><i class="far fa-clock"></i> 2026-03-11 14:32:10</span>
+<div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"><i class="fas fa-user"></i></div>
+</div>
+</div>
+<!-- Body -->
+<div class="main-layout">
+<!-- Nav Sidebar -->
+<div class="sidebar">
+<div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div>
+<div class="sidebar-icon active"><i class="fas fa-building"></i></div>
+<div class="sidebar-icon"><i class="fas fa-door-open"></i></div>
+<div class="sidebar-icon"><i class="fas fa-bolt"></i></div>
+<div class="sidebar-icon" style="margin-top: auto;"><i class="fas fa-cog"></i></div>
+</div>
+<!-- Tree Sidebar -->
+<div class="tree-sidebar">
+<div class="tree-header">
+<div class="search-box">
+<i class="fas fa-search"></i>
+<span>공간 검색...</span>
+</div>
+</div>
+<div class="tree-content">
+<div class="tree-item"><i class="fas fa-building text-blue-500"></i> Twin Tower A</div>
+<div class="tree-item tree-indent"><i class="fas fa-layer-group text-gray-400"></i> 1F 로비</div>
+<div class="tree-item tree-indent"><i class="fas fa-layer-group text-gray-400"></i> 2F 회의실</div>
+<div class="tree-item tree-indent selected"><i class="fas fa-layer-group text-blue-500"></i> 3F 사무실</div>
+<div class="tree-item tree-indent" style="margin-left: 40px;"><i class="far fa-square text-blue-500"></i> 전체 보기</div>
+<div class="tree-item tree-indent" style="margin-left: 40px;"><i class="far fa-square text-gray-400"></i> 남측 구역</div>
+<div class="tree-item tree-indent" style="margin-left: 40px;"><i class="far fa-square text-gray-400"></i> 북측 구역</div>
+<div class="tree-item tree-indent"><i class="fas fa-layer-group text-gray-400"></i> 4F 임원실</div>
+</div>
+</div>
+<!-- Detail Content -->
+<div class="detail-content">
+<!-- Filter Bar -->
+<div class="filter-bar">
+<div class="flex items-center gap-3">
+<h2 class="font-bold text-gray-800">3F 사무실 현황</h2>
+<span class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-bold">12개 객실</span>
+</div>
+<div class="flex gap-2">
+<div class="flex bg-gray-100 p-1 rounded">
+<button class="px-2 py-1 bg-white shadow-sm rounded text-xs font-medium text-gray-700"><i class="fas fa-th-large"></i></button>
+<button class="px-2 py-1 text-xs font-medium text-gray-500 hover:text-gray-700"><i class="fas fa-list"></i></button>
+<button class="px-2 py-1 text-xs font-medium text-gray-500 hover:text-gray-700"><i class="fas fa-map"></i> Heatmap</button>
+</div>
+<button class="px-3 py-1 border border-gray-300 rounded text-xs text-gray-600 flex items-center gap-2">
+<i class="fas fa-filter"></i> 필터
+                                </button>
+</div>
+</div>
+<!-- Card Grid -->
+<div class="card-grid">
+<!-- Card 1: Normal -->
+<div class="room-card">
+<div class="room-header">
+<span class="font-bold text-gray-700">R-301 (업무지원)</span>
+<span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">재실중</span>
+</div>
+<div class="room-body">
+<div class="flex justify-between items-center mb-2">
+<div class="text-3xl font-bold text-gray-800">24.5<span class="text-sm text-gray-500">°C</span></div>
+<div class="flex flex-col items-end">
+<span class="text-xs text-gray-400">현재 인원</span>
+<span class="font-bold text-blue-600"><i class="fas fa-user mr-1"></i> 5명</span>
+</div>
+</div>
+<div class="status-row text-sm text-gray-600">
+<div class="flex gap-4">
+<span class="flex items-center gap-1"><i class="fas fa-lightbulb text-yellow-400"></i> ON</span>
+<span class="flex items-center gap-1"><i class="fas fa-plug text-green-500"></i> ON</span>
+</div>
+<span class="text-xs text-gray-400">설정: 24°C</span>
+</div>
+<div class="mini-chart"><canvas id="chart1"></canvas></div>
+</div>
+</div>
+<!-- Card 2: Alert -->
+<div class="room-card alert" style="border-color: #E5484D; box-shadow: 0 0 0 1px #E5484D;">
+<div class="room-header">
+<span class="font-bold text-gray-700">R-302 (서버실)</span>
+<span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded animate-pulse">온도 경고</span>
+</div>
+<div class="room-body">
+<div class="flex justify-between items-center mb-2">
+<div class="text-3xl font-bold text-red-600">28.2<span class="text-sm text-red-400">°C</span></div>
+<div class="flex flex-col items-end">
+<span class="text-xs text-gray-400">현재 인원</span>
+<span class="font-bold text-gray-400"><i class="fas fa-user mr-1"></i> 0명</span>
+</div>
+</div>
+<div class="status-row text-sm text-gray-600">
+<div class="flex gap-4">
+<span class="flex items-center gap-1"><i class="fas fa-lightbulb text-gray-300"></i> OFF</span>
+<span class="flex items-center gap-1"><i class="fas fa-plug text-green-500"></i> ON</span>
+</div>
+<span class="text-xs text-red-500 font-bold">▲ 2.5°C</span>
+</div>
+<div class="mini-chart"><canvas id="chart2"></canvas></div>
+</div>
+</div>
+<!-- Card 3: Normal -->
+<div class="room-card">
+<div class="room-header">
+<span class="font-bold text-gray-700">R-303 (회의실 A)</span>
+<span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">예약됨</span>
+</div>
+<div class="room-body">
+<div class="flex justify-between items-center mb-2">
+<div class="text-3xl font-bold text-gray-800">23.0<span class="text-sm text-gray-500">°C</span></div>
+<div class="flex flex-col items-end">
+<span class="text-xs text-gray-400">현재 인원</span>
+<span class="font-bold text-blue-600"><i class="fas fa-user mr-1"></i> 8명</span>
+</div>
+</div>
+<div class="status-row text-sm text-gray-600">
+<div class="flex gap-4">
+<span class="flex items-center gap-1"><i class="fas fa-lightbulb text-yellow-400"></i> ON</span>
+<span class="flex items-center gap-1"><i class="fas fa-wind text-blue-400"></i> High</span>
+</div>
+<span class="text-xs text-gray-400">CO2: 450ppm</span>
+</div>
+<div class="mini-chart"><canvas id="chart3"></canvas></div>
+</div>
+</div>
+<!-- Card 4: Empty -->
+<div class="room-card opacity-75">
+<div class="room-header">
+<span class="font-bold text-gray-500">R-304 (휴게실)</span>
+<span class="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded">공실</span>
+</div>
+<div class="room-body">
+<div class="flex justify-between items-center mb-2">
+<div class="text-3xl font-bold text-gray-400">21.5<span class="text-sm text-gray-400">°C</span></div>
+<div class="flex flex-col items-end">
+<span class="text-xs text-gray-400">현재 인원</span>
+<span class="font-bold text-gray-400"><i class="fas fa-user mr-1"></i> 0명</span>
+</div>
+</div>
+<div class="status-row text-sm text-gray-400">
+<div class="flex gap-4">
+<span class="flex items-center gap-1"><i class="fas fa-lightbulb text-gray-300"></i> OFF</span>
+<span class="flex items-center gap-1"><i class="fas fa-plug text-gray-300"></i> OFF</span>
+</div>
+<span class="text-xs">절전 모드</span>
+</div>
+<div class="h-10 border-t border-dashed border-gray-200 mt-2 flex items-center justify-center text-xs text-gray-400">No Data</div>
+</div>
+</div>
+</div>
+<!-- Right Drawer (Detail) -->
+<div class="detail-drawer">
+<div class="drawer-header">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-bold text-lg text-gray-900">R-302 서버실</h3>
+<p class="text-xs text-gray-500">Zone C | ID: 302_SRV</p>
+</div>
+<button class="text-gray-400 hover:text-gray-600"><i class="fas fa-times"></i></button>
+</div>
+<div class="mt-3 flex gap-2">
+<button class="flex-1 bg-blue-600 text-white text-xs py-1.5 rounded hover:bg-blue-700">제어</button>
+<button class="flex-1 border border-gray-300 text-gray-600 text-xs py-1.5 rounded hover:bg-gray-50">이력</button>
+</div>
+</div>
+<div class="drawer-body">
+<div class="info-group">
+<div class="info-label">최근 이벤트</div>
+<div class="space-y-2">
+<div class="flex gap-2 text-xs">
+<i class="fas fa-exclamation-circle text-red-500 mt-0.5"></i>
+<div>
+<p class="font-bold text-gray-700">고온 경보 발생</p>
+<p class="text-gray-400">14:30:05 (Current)</p>
+</div>
+</div>
+<div class="flex gap-2 text-xs">
+<i class="fas fa-info-circle text-blue-500 mt-0.5"></i>
+<div>
+<p class="font-bold text-gray-700">냉방기 가동 (Auto)</p>
+<p class="text-gray-400">14:30:10</p>
+</div>
+</div>
+</div>
+</div>
+<div class="info-group">
+<div class="info-label">센서 상세 정보</div>
+<div class="grid grid-cols-2 gap-y-3 gap-x-2">
+<div>
+<p class="text-xs text-gray-400">현재 온도</p>
+<p class="text-sm font-bold text-red-600">28.2°C</p>
+</div>
+<div>
+<p class="text-xs text-gray-400">설정 온도</p>
+<p class="text-sm font-bold text-gray-700">22.0°C</p>
+</div>
+<div>
+<p class="text-xs text-gray-400">습도</p>
+<p class="text-sm font-bold text-gray-700">45%</p>
+</div>
+<div>
+<p class="text-xs text-gray-400">전력</p>
+<p class="text-sm font-bold text-gray-700">3.2kW</p>
+</div>
+</div>
+</div>
+<div class="info-group">
+<div class="info-label">트렌드 (1H)</div>
+<div class="h-24 bg-gray-50 rounded border border-gray-200 p-2 flex items-center justify-center text-xs text-gray-400">
+                                            상세 그래프 영역
+                                        </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Callouts -->
+<div class="callout" style="top: 250px; left: 280px;">1</div>
+<div class="callout" style="top: 250px; left: 700px;">2</div>
+<div class="callout" style="top: 550px; right: 300px;">3</div>
+<div class="callout" style="top: 150px; right: 50px;">4</div>
+<!-- Right: Description -->
+<div class="desc-panel">
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-list-ul text-blue-600"></i>
+<span>화면 구성 요소</span>
+</div>
+<div class="desc-list">
+<div class="desc-item">
+<div class="desc-num">1</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">공간 트리 &amp; 검색</p>
+<p class="text-xs text-gray-500">
+                                빌딩 전체의 계층 구조 탐색. 
+                                층/구역 단위 선택 시 우측 그리드 내용 필터링.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">2</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">객실 상태 카드</p>
+<p class="text-xs text-gray-500">
+                                각 객실의 핵심 상태(온도, 재실, 전원) 요약.
+                                이상 발생 시 테두리 색상 변경(Red) 및 애니메이션 효과.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">3</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">미니 트렌드 차트</p>
+<p class="text-xs text-gray-500">
+                                카드 내부 스파크라인을 통해 최근 1시간 온도/에너지 변화 추세 즉시 파악.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">4</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">상세 정보 드로어</p>
+<p class="text-xs text-gray-500">
+                                카드 선택 시 우측에서 슬라이드되는 패널.
+                                상세 센서 값, 최근 이벤트 로그, 제어 버튼 제공.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-mouse-pointer text-blue-600"></i>
+<span>핵심 시나리오</span>
+</div>
+<div class="scenario-box">
+<h4 class="font-bold text-sm text-blue-900 mb-3">#1. 온도 이상 객실 원인 파악</h4>
+<div class="scenario-step">
+<i class="fas fa-exclamation-triangle text-red-500 w-4"></i>
+<span>카드 그리드에서 'R-302' 붉은색 경고 확인</span>
+</div>
+<div class="pl-5 mb-2"><i class="fas fa-arrow-down step-arrow"></i></div>
+<div class="scenario-step">
+<i class="fas fa-mouse-pointer text-blue-500 w-4"></i>
+<span>카드 클릭하여 우측 상세 드로어 오픈</span>
+</div>
+<div class="pl-5 mb-2"><i class="fas fa-arrow-down step-arrow"></i></div>
+<div class="scenario-step">
+<i class="fas fa-history text-gray-500 w-4"></i>
+<span>'최근 이벤트'에서 고온 경보 발생 시점 확인</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+    // Chart options for Sparklines
+    const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        scales: {
+            x: { display: false },
+            y: { display: false, min: 20, max: 30 }
+        },
+        elements: {
+            point: { radius: 0 },
+            line: { borderWidth: 2, tension: 0.4 }
+        }
+    };
+
+    // Chart 1 (Normal)
+    new Chart(document.getElementById('chart1'), {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8,9,10],
+            datasets: [{
+                data: [23,23.2,23.5,23.8,24.0,24.2,24.3,24.4,24.5,24.5],
+                borderColor: '#2F6FED',
+                backgroundColor: 'rgba(47, 111, 237, 0.1)',
+                fill: true
+            }]
+        },
+        options: commonOptions
+    });
+
+    // Chart 2 (Alert - Rising)
+    new Chart(document.getElementById('chart2'), {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8,9,10],
+            datasets: [{
+                data: [24,24.5,25,25.5,26,26.8,27.2,27.8,28.0,28.2],
+                borderColor: '#E5484D',
+                backgroundColor: 'rgba(229, 72, 77, 0.1)',
+                fill: true
+            }]
+        },
+        options: {
+            ...commonOptions,
+            scales: { x: {display:false}, y: {display:false} } // Auto scale
+        }
+    });
+
+    // Chart 3 (Stable)
+    new Chart(document.getElementById('chart3'), {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8,9,10],
+            datasets: [{
+                data: [22.8,22.9,23.0,22.9,23.0,23.1,23.0,22.9,23.0,23.0],
+                borderColor: '#2DBE60',
+                backgroundColor: 'rgba(45, 190, 96, 0.1)',
+                fill: true
+            }]
+        },
+        options: commonOptions
+    });
+</script>
+</body>
+</html>

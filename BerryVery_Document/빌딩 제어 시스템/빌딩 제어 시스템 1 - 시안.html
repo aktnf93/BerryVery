@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>빌딩 제어 시스템 UI 시안</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8f9fa;
+        }
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Background Abstract Shapes */
+        .bg-shape-1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 800px;
+            height: 800px;
+            background-color: rgba(47, 111, 237, 0.03); /* #2F6FED with low opacity */
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .bg-shape-2 {
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 600px;
+            height: 600px;
+            background-color: rgba(45, 190, 96, 0.03); /* #2DBE60 with low opacity */
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .grid-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, #e5e7eb 1px, transparent 1px),
+                linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
+            background-size: 80px 80px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            border-radius: 24px;
+            padding: 80px 100px;
+            text-align: center;
+            z-index: 10;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .title-gradient {
+            background: #2F6FED;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #2F6FED; /* Fallback */
+        }
+
+        .info-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            background-color: #f3f4f6;
+            border-radius: 12px;
+            margin: 0 12px;
+            color: #4b5563;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .info-badge i {
+            margin-right: 12px;
+            color: #2F6FED;
+            font-size: 1.2rem;
+        }
+
+        .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .design-stripe {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 12px;
+            background: #2F6FED;
+            z-index: 20;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="grid-pattern"></div>
+<div class="bg-shape-1"></div>
+<div class="bg-shape-2"></div>
+<div class="design-stripe"></div>
+<!-- Main Content -->
+<div class="glass-card">
+<div class="mb-6">
+<p class="text-gray-500 font-medium tracking-widest uppercase mb-2">Project Proposal</p>
+<div class="w-16 h-1 bg-blue-500 mx-auto rounded"></div>
+</div>
+<h1 class="text-7xl font-black mb-8 leading-tight text-gray-900">
+<span class="title-gradient">빌딩 제어 시스템</span><br/>
+<span class="font-light text-gray-700">UI/UX 디자인 시안</span>
+</h1>
+<div class="flex flex-col gap-2 mb-12">
+<p class="text-xl text-gray-500 font-light">Building Management System (BMS) Desktop Application</p>
+</div>
+<!-- Info Badges -->
+<div class="flex justify-center items-center flex-wrap gap-4 mb-12">
+<div class="info-badge">
+<i class="fab fa-windows"></i>
+<span>C# WPF Desktop</span>
+</div>
+<div class="info-badge">
+<i class="fas fa-desktop"></i>
+<span>1920 x 1080</span>
+</div>
+<div class="info-badge">
+<i class="fas fa-palette"></i>
+<span>Enterprise Light Theme</span>
+</div>
+</div>
+<!-- Color Palette Preview -->
+<div class="flex justify-center items-center gap-6 mt-8 border-t border-gray-200 pt-8">
+<div class="flex items-center">
+<span class="color-dot" style="background-color: #2F6FED;"></span>
+<span class="text-sm text-gray-500 font-mono">Primary</span>
+</div>
+<div class="flex items-center">
+<span class="color-dot" style="background-color: #2DBE60;"></span>
+<span class="text-sm text-gray-500 font-mono">Success</span>
+</div>
+<div class="flex items-center">
+<span class="color-dot" style="background-color: #F5A524;"></span>
+<span class="text-sm text-gray-500 font-mono">Warning</span>
+</div>
+<div class="flex items-center">
+<span class="color-dot" style="background-color: #E5484D;"></span>
+<span class="text-sm text-gray-500 font-mono">Danger</span>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-10 w-full text-center">
+<p class="text-gray-400 text-sm">© 2026 Building Control Solutions. Confidential.</p>
+</div>
+</div>
+</body>
+</html>

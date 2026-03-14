@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>제어 화면 - 출입통제</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Style */
+        .slide-header {
+            height: 120px;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            background: #ffffff;
+            z-index: 10;
+        }
+        .header-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header-number {
+            color: #2F6FED;
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            padding: 40px 80px;
+            gap: 50px;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        /* Left: UI Mockup */
+        .ui-mockup-wrapper {
+            flex: 2.2;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 8px solid #374151; /* Monitor Bezel */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .app-bar {
+            height: 50px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .main-layout {
+            flex: 1;
+            display: flex;
+            background: #f3f4f6;
+            overflow: hidden;
+        }
+
+        /* Navigation Sidebar */
+        .sidebar {
+            width: 60px;
+            background: #1f2937;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+            gap: 15px;
+            z-index: 20;
+        }
+        .sidebar-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sidebar-icon:hover { background: #374151; color: white; }
+        .sidebar-icon.active { background: #2F6FED; color: white; }
+
+        /* Tree Sidebar */
+        .tree-sidebar {
+            width: 240px;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+        }
+        .tree-header {
+            padding: 15px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .search-box {
+            background: #f3f4f6;
+            border-radius: 4px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+        .tree-content {
+            padding: 10px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .tree-item {
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #4b5563;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 2px;
+        }
+        .tree-item:hover { background: #f3f4f6; }
+        .tree-item.selected { background: #eff6ff; color: #2F6FED; font-weight: 600; border-right: 3px solid #2F6FED; }
+        .tree-indent { margin-left: 20px; }
+
+        /* Control Panel Content */
+        .control-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #f9fafb;
+            padding: 24px;
+            gap: 24px;
+            overflow-y: auto;
+        }
+
+        .target-header {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .control-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #f3f4f6;
+            padding-bottom: 12px;
+        }
+
+        /* Custom Toggle */
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+        .custom-toggle {
+            width: 48px;
+            height: 26px;
+            background: #e5e7eb;
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .custom-toggle.on { background: #2F6FED; }
+        .custom-toggle-knob {
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .custom-toggle.on .custom-toggle-knob { transform: translateX(22px); }
+
+        /* Door Control specific */
+        .door-status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            color: #166534;
+            font-weight: 700;
+            font-size: 16px;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .door-status-indicator.locked {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+            color: #1e40af;
+        }
+         .door-status-indicator.emergency {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #b91c1c;
+        }
+
+        .control-btn-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .control-btn {
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            color: #374151;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .control-btn:hover { background: #f9fafb; border-color: #d1d5db; }
+        .control-btn.active { background: #eff6ff; border-color: #2F6FED; color: #2F6FED; }
+        .control-btn.danger { color: #E5484D; border-color: #fee2e2; background: #fff5f5; }
+        .control-btn.danger:hover { background: #fee2e2; }
+
+        .interlock-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        .status-badge {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .status-badge.ok { background: #dcfce7; color: #15803d; }
+        .status-badge.warn { background: #ffedd5; color: #c2410c; }
+
+        /* Log Panel */
+        .log-panel {
+            background: #1f2937;
+            color: #e5e7eb;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            font-family: monospace;
+            font-size: 12px;
+            border-top: 1px solid #374151;
+        }
+        .log-header {
+            padding: 8px 16px;
+            background: #374151;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+        }
+        .log-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 16px;
+        }
+        .log-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+        .log-time { color: #9ca3af; }
+        .log-status { color: #2DBE60; }
+        .log-status.pending { color: #F5A524; }
+        .log-status.danger { color: #E5484D; }
+
+        /* Callout Markers */
+        .callout {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: #E5484D;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            z-index: 50;
+        }
+
+        /* Right Panel */
+        .desc-panel {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .desc-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .desc-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .desc-item {
+            display: flex;
+            gap: 12px;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+        .desc-num {
+            width: 24px;
+            height: 24px;
+            background: #fee2e2;
+            color: #E5484D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .scenario-box {
+            background: #eff6ff;
+            border-left: 4px solid #2F6FED;
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 12px;
+        }
+        .scenario-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #374151;
+        }
+        .step-arrow { color: #9ca3af; font-size: 12px; }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header -->
+<header class="slide-header">
+<div class="header-title">
+<span class="header-number">09</span>
+<span>제어 화면 — 출입통제</span>
+</div>
+<div class="text-right">
+<p class="text-gray-500 text-sm font-medium">Building Control System UI Project</p>
+<p class="text-gray-400 text-xs">Page 09 / 15</p>
+</div>
+</header>
+<!-- Main Content -->
+<div class="content-area">
+<!-- Left: UI Mockup -->
+<div class="ui-mockup-wrapper">
+<!-- App Bar -->
+<div class="app-bar">
+<div class="flex items-center gap-4">
+<i class="fas fa-bars text-gray-500"></i>
+<span class="font-bold text-lg text-blue-600">BMS <span class="text-gray-600 font-normal text-sm">| Twin Tower A</span></span>
+</div>
+<div class="flex items-center gap-4 text-gray-500 text-sm">
+<span><i class="far fa-clock"></i> 2026-03-11 14:38:22</span>
+<div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"><i class="fas fa-user-shield"></i></div>
+</div>
+</div>
+<!-- Body -->
+<div class="main-layout">
+<!-- Nav Sidebar -->
+<div class="sidebar">
+<div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div>
+<div class="sidebar-icon"><i class="fas fa-building"></i></div>
+<div class="sidebar-icon active"><i class="fas fa-sliders-h"></i></div>
+<div class="sidebar-icon"><i class="fas fa-bolt"></i></div>
+<div class="sidebar-icon" style="margin-top: auto;"><i class="fas fa-cog"></i></div>
+</div>
+<!-- Tree Sidebar -->
+<div class="tree-sidebar">
+<div class="tree-header">
+<div class="search-box">
+<i class="fas fa-search"></i>
+<span class="text-gray-400">장치 검색...</span>
+</div>
+</div>
+<div class="tree-content">
+<div class="tree-item"><i class="fas fa-building text-gray-400"></i> Twin Tower A</div>
+<div class="tree-item tree-indent"><i class="fas fa-angle-down text-gray-400 mr-1"></i><i class="fas fa-door-open text-gray-400"></i> 1F 로비</div>
+<div class="tree-item selected" style="margin-left: 40px;"><i class="far fa-check-circle text-blue-500"></i> 메인 게이트 (D-101)</div>
+<div class="tree-item" style="margin-left: 40px;"><i class="far fa-circle text-gray-400"></i> 후문 게이트 (D-102)</div>
+<div class="tree-item" style="margin-left: 40px;"><i class="far fa-circle text-gray-400"></i> 화물용 EV 로비</div>
+<div class="tree-item tree-indent"><i class="fas fa-angle-right text-gray-400 mr-1"></i><i class="fas fa-door-open text-gray-400"></i> 2F 사무실 입구</div>
+<div class="tree-item tree-indent"><i class="fas fa-angle-right text-gray-400 mr-1"></i><i class="fas fa-door-open text-gray-400"></i> B1 주차장</div>
+</div>
+</div>
+<!-- Control Content -->
+<div class="flex flex-col flex-1 overflow-hidden">
+<div class="control-content">
+<!-- Target Header -->
+<div class="target-header">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xl">
+<i class="fas fa-door-closed"></i>
+</div>
+<div>
+<h2 class="text-xl font-bold text-gray-800">메인 게이트 (D-101)</h2>
+<p class="text-sm text-gray-500">1F 로비 Zone A | 보안 등급: <span class="text-blue-600 font-bold">Level 3</span></p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-gray-300 rounded text-sm font-medium hover:bg-gray-50">제어 이력</button>
+<button class="px-4 py-2 bg-red-50 text-red-600 border border-red-200 rounded text-sm font-medium hover:bg-red-100"><i class="fas fa-exclamation-triangle mr-2"></i>장애 신고</button>
+</div>
+</div>
+<!-- Control Grid -->
+<div class="control-grid">
+<!-- Door Control -->
+<div class="control-card">
+<div class="card-title">
+<i class="fas fa-key text-blue-500"></i>
+<span>출입문 제어 (Door Control)</span>
+<span class="ml-auto text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">Online</span>
+</div>
+<div class="door-status-indicator locked">
+<i class="fas fa-lock"></i>
+<span>LOCKED (잠김)</span>
+</div>
+<div class="control-btn-grid">
+<div class="control-btn active">
+<i class="fas fa-lock"></i>
+<span>Lock</span>
+</div>
+<div class="control-btn">
+<i class="fas fa-lock-open"></i>
+<span>Unlock</span>
+</div>
+<div class="control-btn">
+<i class="far fa-clock"></i>
+<span>일시 개방</span>
+</div>
+</div>
+<div class="mt-4 p-2 bg-blue-50 rounded text-xs text-blue-800 flex items-start gap-2">
+<i class="fas fa-info-circle mt-0.5"></i>
+<p>현재 스케줄에 의해 '잠김' 상태가 유지되고 있습니다. (09:00~18:00)</p>
+</div>
+</div>
+<!-- Access Authority -->
+<div class="control-card">
+<div class="card-title">
+<i class="fas fa-id-badge text-purple-500"></i>
+<span>권한 제어 (Authority)</span>
+</div>
+<div class="toggle-row">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-gray-700">카드 리더기 활성</span>
+<span class="text-xs text-gray-400">Card Reader #101</span>
+</div>
+<div class="custom-toggle on"><div class="custom-toggle-knob"></div></div>
+</div>
+<div class="toggle-row border-t border-gray-100 mt-2 pt-2">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-gray-700">바이오 인증 활성</span>
+<span class="text-xs text-gray-400">지문/안면 인식</span>
+</div>
+<div class="custom-toggle on"><div class="custom-toggle-knob"></div></div>
+</div>
+<div class="mt-4">
+<label class="block text-xs font-bold text-gray-500 mb-2">출입 제한 그룹</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-bold">방문객</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-500 rounded text-xs">임직원</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-500 rounded text-xs">관리자</span>
+</div>
+</div>
+</div>
+<!-- Emergency Control -->
+<div class="control-card border-red-200">
+<div class="card-title">
+<i class="fas fa-exclamation-circle text-red-500"></i>
+<span>비상 제어 (Emergency)</span>
+</div>
+<p class="text-xs text-red-600 mb-4 font-medium">
+<i class="fas fa-exclamation-triangle mr-1"></i>
+주의: 강제 개방 시 보안 알람이 발생합니다.
+</p>
+<button class="w-full py-3 bg-red-600 text-white rounded font-bold hover:bg-red-700 shadow-md mb-2 flex items-center justify-center gap-2">
+<i class="fas fa-door-open"></i>
+비상 강제 개방 (Emergency Open)
+</button>
+<div class="text-center">
+<span class="text-xs text-gray-400">* 2단계 관리자 인증이 필요합니다.</span>
+</div>
+</div>
+<!-- Safety Interlock -->
+<div class="control-card">
+<div class="card-title">
+<i class="fas fa-shield-alt text-green-600"></i>
+<span>안전 인터락 (Interlock)</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="interlock-item">
+<div class="flex items-center gap-2">
+<i class="fas fa-fire-extinguisher text-gray-400 w-4"></i>
+<span>화재 감지 연동</span>
+</div>
+<span class="status-badge ok">정상 (Normal)</span>
+</div>
+<div class="interlock-item">
+<div class="flex items-center gap-2">
+<i class="fas fa-video text-gray-400 w-4"></i>
+<span>CCTV 연동 녹화</span>
+</div>
+<span class="status-badge ok">녹화중 (Rec)</span>
+</div>
+<div class="interlock-item">
+<div class="flex items-center gap-2">
+<i class="fas fa-bell text-gray-400 w-4"></i>
+<span>침입 탐지 센서</span>
+</div>
+<span class="status-badge ok">감시중 (Armed)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Log Panel -->
+<div class="log-panel">
+<div class="log-header">
+<span><i class="fas fa-terminal mr-2"></i>Access Control Logs</span>
+<span class="text-xs font-normal opacity-70">Target: Main Gate (D-101)</span>
+</div>
+<div class="log-content">
+<div class="log-item">
+<span class="log-time">[14:38:10]</span>
+<span>Command: 'Lock' executed by Admin(root)</span>
+<span class="log-status">Success</span>
+</div>
+<div class="log-item">
+<span class="log-time">[14:35:05]</span>
+<span>Access Denied: Card ID #99281 (Expired)</span>
+<span class="log-status danger">Warning</span>
+</div>
+<div class="log-item">
+<span class="log-time">[14:30:00]</span>
+<span>Scheduled Lock Schedule Activated</span>
+<span class="log-status">Success</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Callouts -->
+<div class="callout" style="top: 150px; left: 240px;">1</div>
+<div class="callout" style="top: 300px; left: 340px;">2</div>
+<div class="callout" style="top: 650px; left: 340px;">3</div>
+<div class="callout" style="top: 860px; right: 400px;">4</div>
+</div>
+<!-- Right: Description -->
+<div class="desc-panel">
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-list-ul text-blue-600"></i>
+<span>화면 구성 요소</span>
+</div>
+<div class="desc-list">
+<div class="desc-item">
+<div class="desc-num">1</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">장치 선택 (트리)</p>
+<p class="text-xs text-gray-500">
+                                층/구역별 출입문, 게이트, 엘리베이터 등 물리적 보안 장치를 계층적으로 선택.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">2</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">도어/권한 제어</p>
+<p class="text-xs text-gray-500">
+                                Lock(잠금), Unlock(해제), 일시개방 등 물리적 제어와 카드 리더기 활성/비활성 제어.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">3</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">비상 제어 및 인터락</p>
+<p class="text-xs text-gray-500">
+                                화재 등 비상시 2단계 인증 후 강제 개방(Emergency Open) 및 안전 시스템 연동 상태 확인.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">4</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">명령 로그</p>
+<p class="text-xs text-gray-500">
+                                제어 명령 실행 결과 및 출입 거부(Access Denied) 등 주요 보안 이벤트를 실시간 표시.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-mouse-pointer text-blue-600"></i>
+<span>핵심 시나리오</span>
+</div>
+<div class="scenario-box">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#1. 대피 훈련 시 계단실 일괄 개방</h4>
+<div class="scenario-step">
+<i class="fas fa-door-open text-green-600 w-4"></i>
+<span>구역 트리에서 '전체 계단실' 그룹 선택</span>
+</div>
+<div class="scenario-step">
+<i class="far fa-clock text-blue-500 w-4"></i>
+<span>'일시 개방' 선택 후 시간(60분) 설정 및 실행</span>
+</div>
+</div>
+<div class="scenario-box">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#2. 비상 강제 개방 (Emergency)</h4>
+<div class="scenario-step">
+<i class="fas fa-exclamation-circle text-red-500 w-4"></i>
+<span>'비상 강제 개방' 버튼 클릭 (적색)</span>
+</div>
+<div class="scenario-step">
+<i class="fas fa-user-shield text-gray-500 w-4"></i>
+<span>관리자 비밀번호 재입력 (2단계 인증) -&gt; 즉시 개방</span>
+</div>
+</div>
+<div class="scenario-box mb-0">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#3. 특정 리더기 일시 정지</h4>
+<div class="scenario-step">
+<i class="fas fa-ban text-orange-500 w-4"></i>
+<span>유지보수 중인 게이트 리더기 토글 'Off' 설정</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

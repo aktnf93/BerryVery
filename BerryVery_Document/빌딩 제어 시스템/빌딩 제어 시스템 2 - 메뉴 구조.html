@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>전체 IA / 메뉴 구조</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header Style */
+        .slide-header {
+            height: 120px;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            background: #ffffff;
+            z-index: 10;
+        }
+        .header-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header-number {
+            color: #2F6FED;
+            font-size: 48px;
+            font-weight: 900;
+        }
+        
+        /* Content Layout */
+        .content-area {
+            flex: 1;
+            display: flex;
+            padding: 60px 80px;
+            gap: 80px;
+            background-color: #f8f9fa;
+        }
+
+        /* Left Column: Layout Wireframe */
+        .layout-col {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+        }
+        .wireframe-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 40px;
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* The Mini Screen Representation */
+        .screen-mockup {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .mock-app-bar {
+            height: 40px; /* Scaled down 64px */
+            background: #2F6FED;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .mock-body {
+            flex: 1;
+            display: flex;
+        }
+        
+        .mock-sidebar {
+            width: 80px; /* Scaled down 240px */
+            background: #1f2937;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 10px;
+        }
+        
+        .mock-sidebar-item {
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            width: 60%;
+        }
+        
+        .mock-content {
+            flex: 1;
+            background: #f3f4f6;
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-content: start;
+        }
+        
+        .mock-card {
+            width: 80px;
+            height: 60px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .mock-status-bar {
+            height: 20px; /* Scaled down 32px */
+            background: #ffffff;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+        
+        /* Dimension Markers */
+        .dim-marker {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #E5484D;
+            font-weight: 700;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #E5484D;
+            padding: 4px 8px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 20;
+        }
+        
+        /* Right Column: IA Tree */
+        .ia-col {
+            width: 65%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tree-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            height: 100%;
+        }
+        
+        .tree-level-1 {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+        }
+        
+        .module-group {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border-top: 4px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .module-group.primary { border-top-color: #2F6FED; }
+        .module-group.success { border-top-color: #2DBE60; }
+        .module-group.warning { border-top-color: #F5A524; }
+        .module-group.danger { border-top-color: #E5484D; }
+        
+        .module-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f3f4f6;
+            margin-bottom: 4px;
+        }
+        
+        .module-title i {
+            width: 32px;
+            height: 32px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .primary .module-title i { color: #2F6FED; background: #eff6ff; }
+        .success .module-title i { color: #2DBE60; background: #f0fdf4; }
+        .warning .module-title i { color: #F5A524; background: #fffbeb; }
+        .danger .module-title i { color: #E5484D; background: #fef2f2; }
+        
+        .sub-menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .sub-menu-item {
+            padding: 10px 14px;
+            background: #f9fafb;
+            border-radius: 6px;
+            font-size: 15px;
+            color: #4b5563;
+            border: 1px solid transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sub-menu-item:hover {
+            border-color: #d1d5db;
+            background: #f3f4f6;
+        }
+
+        .tag {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .tag-gray { background: #e5e7eb; color: #374151; }
+        .tag-blue { background: #dbeafe; color: #1e40af; }
+
+        .legend-area {
+            margin-top: auto;
+            display: flex;
+            gap: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        .legend-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            background: #f3f4f6;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header -->
+<header class="slide-header">
+<div class="header-title">
+<span class="header-number">02</span>
+<span>전체 IA / 메뉴 구조</span>
+</div>
+<div class="text-right">
+<p class="text-gray-500 text-sm font-medium">Building Control System UI Project</p>
+<p class="text-gray-400 text-xs">Page 02 / 15</p>
+</div>
+</header>
+<!-- Content -->
+<div class="content-area">
+<!-- Left Column: Layout Structure -->
+<div class="layout-col">
+<h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+<i class="fas fa-layer-group text-blue-500"></i> 레이아웃 구조 (WPF Grid)
+                </h3>
+<div class="wireframe-container">
+<div class="screen-mockup">
+<div class="mock-app-bar">
+<div class="w-24 h-3 bg-white/20 rounded"></div>
+<div class="flex gap-2">
+<div class="w-6 h-6 bg-white/20 rounded-full"></div>
+<div class="w-6 h-6 bg-white/20 rounded-full"></div>
+</div>
+</div>
+<div class="mock-body">
+<div class="mock-sidebar">
+<div class="mock-sidebar-item" style="width: 80%"></div>
+<div class="mock-sidebar-item"></div>
+<div class="mock-sidebar-item"></div>
+<div class="mt-4 mock-sidebar-item" style="width: 50%"></div>
+<div class="mock-sidebar-item"></div>
+</div>
+<div class="mock-content">
+<div class="w-full h-8 bg-white border border-gray-200 rounded mb-2 flex items-center px-2 text-[8px] text-gray-400">Breadcrumb &gt; Current Page</div>
+<div class="mock-card" style="flex:2"></div>
+<div class="mock-card" style="flex:1"></div>
+<div class="mock-card" style="flex:1"></div>
+<div class="w-full h-24 bg-white border border-gray-200 rounded"></div>
+</div>
+</div>
+<div class="mock-status-bar">
+<div class="w-20 h-2 bg-gray-200 rounded"></div>
+</div>
+<!-- Dimensions Overlay -->
+<div class="dim-marker" style="top: 10px; left: 50%; transform: translateX(-50%);">App Bar: 64px</div>
+<div class="dim-marker" style="left: 10px; top: 50%; transform: translateY(-50%);">Sidebar: 240px</div>
+<div class="dim-marker" style="bottom: 10px; left: 50%; transform: translateX(-50%);">Status Bar: 32px</div>
+<div class="dim-marker" style="top: 50%; right: 10px; transform: translateY(-50%); background: #2F6FED; color: white; border: none;">1920 x 1080</div>
+</div>
+<div class="mt-8 space-y-4">
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm shrink-0">1</div>
+<div>
+<p class="font-bold text-gray-800">Top App Bar (64px)</p>
+<p class="text-sm text-gray-500 mt-1">Global Navigation, 알림 센터, 사용자 프로필, 검색</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm shrink-0">2</div>
+<div>
+<p class="font-bold text-gray-800">Left Sidebar (240px)</p>
+<p class="text-sm text-gray-500 mt-1">대메뉴/소메뉴 트리 구조, 접기/펼치기 지원</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm shrink-0">3</div>
+<div>
+<p class="font-bold text-gray-800">Content Area (Fluid)</p>
+<p class="text-sm text-gray-500 mt-1">해상도 대응 반응형 그리드 시스템 (12 Column)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: IA Tree -->
+<div class="ia-col">
+<h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+<i class="fas fa-sitemap text-blue-500"></i> 메뉴 계층 구조 (Information Architecture)
+                </h3>
+<div class="tree-container">
+<!-- Row 1: Main Operations -->
+<div class="tree-level-1" style="flex: 2;">
+<div class="module-group primary">
+<div class="module-title">
+<i class="fas fa-desktop"></i>
+<span>모니터링</span>
+</div>
+<div class="sub-menu-list">
+<div class="sub-menu-item">
+<span>Overview (대시보드)</span>
+<span class="tag tag-blue">Main</span>
+</div>
+<div class="sub-menu-item">
+<span>사무실 / 객실</span>
+<span class="tag tag-gray">List/Map</span>
+</div>
+<div class="sub-menu-item">
+<span>출입통제 구역</span>
+<span class="tag tag-gray">Map</span>
+</div>
+<div class="sub-menu-item">
+<span>에너지 현황</span>
+<span class="tag tag-gray">Chart</span>
+</div>
+</div>
+</div>
+<div class="module-group success">
+<div class="module-title">
+<i class="fas fa-sliders-h"></i>
+<span>제어 관리</span>
+</div>
+<div class="sub-menu-list">
+<div class="sub-menu-item">
+<span>사무실 / 객실 제어</span>
+</div>
+<div class="sub-menu-item">
+<span>출입통제 제어</span>
+<span class="tag tag-gray">Auth</span>
+</div>
+<div class="sub-menu-item">
+<span>스케줄 설정</span>
+</div>
+<div class="sub-menu-item">
+<span>장면(Scene) 설정</span>
+</div>
+</div>
+</div>
+<div class="module-group warning">
+<div class="module-title">
+<i class="fas fa-cog"></i>
+<span>시스템 등록</span>
+</div>
+<div class="sub-menu-list">
+<div class="sub-menu-item">
+<span>설비 / 구역 등록</span>
+</div>
+<div class="sub-menu-item">
+<span>정책 관리</span>
+</div>
+<div class="sub-menu-item">
+<span>게이트웨이 설정</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 2: Management & Users -->
+<div class="tree-level-1" style="flex: 1.5;">
+<div class="module-group" style="border-top-color: #6b7280;">
+<div class="module-title">
+<i class="fas fa-history"></i>
+<span>이력 조회</span>
+</div>
+<div class="sub-menu-list">
+<div class="sub-menu-item">
+<span>이벤트 로그</span>
+</div>
+<div class="sub-menu-item">
+<span>알람 이력</span>
+</div>
+<div class="sub-menu-item">
+<span>제어 이력</span>
+</div>
+</div>
+</div>
+<div class="module-group" style="border-top-color: #8b5cf6;">
+<div class="module-title">
+<i class="fas fa-users-cog"></i>
+<span>계정 / 이용자</span>
+</div>
+<div class="sub-menu-list">
+<div class="sub-menu-item">
+<span>시설 이용자 등록</span>
+<span class="tag tag-blue">Form</span>
+</div>
+<div class="sub-menu-item">
+<span>운영자 계정 관리</span>
+</div>
+<div class="sub-menu-item">
+<span>권한(Role) 관리</span>
+</div>
+</div>
+</div>
+<div class="module-group danger">
+<div class="module-title">
+<i class="fas fa-shield-alt"></i>
+<span>보안 / 로그인</span>
+</div>
+<div class="sub-menu-list">
+<div class="sub-menu-item">
+<span>로그인 / 로그아웃</span>
+</div>
+<div class="sub-menu-item">
+<span>비밀번호 변경</span>
+</div>
+<div class="sub-menu-item">
+<span>서버 연결 설정</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Legend -->
+<div class="legend-area">
+<div class="legend-item">
+<span class="legend-icon"><i class="fas fa-mouse-pointer"></i></span>
+<span>Click Interaction</span>
+</div>
+<div class="legend-item">
+<span class="legend-icon"><i class="fas fa-layer-group"></i></span>
+<span>Modal / Popup</span>
+</div>
+<div class="legend-item">
+<span class="legend-icon"><i class="fas fa-bars"></i></span>
+<span>Drawer Menu</span>
+</div>
+<div class="ml-auto text-sm text-gray-400">
+                    * 모든 화면은 공통 프레임워크 기반으로 동작함
+                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>로그인 화면</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Style */
+        .slide-header {
+            height: 120px;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            background: #ffffff;
+            z-index: 10;
+        }
+        .header-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header-number {
+            color: #2F6FED;
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            padding: 40px 80px;
+            gap: 50px;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        /* Left: UI Mockup */
+        .ui-mockup-wrapper {
+            flex: 2.2;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 8px solid #374151; /* Monitor Bezel */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Login Screen Layout */
+        .login-screen {
+            flex: 1;
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .login-card {
+            width: 480px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e5e7eb;
+            z-index: 10;
+        }
+
+        .login-header {
+            background: white;
+            padding: 40px 40px 20px 40px;
+            text-align: center;
+        }
+        
+        .brand-logo {
+            width: 64px;
+            height: 64px;
+            background: #2F6FED;
+            color: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 20px auto;
+        }
+
+        .login-body {
+            padding: 0 40px 40px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 14px;
+        }
+        .form-input {
+            width: 100%;
+            height: 44px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 0 12px 0 36px;
+            font-size: 14px;
+            color: #1f2937;
+            transition: all 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #2F6FED;
+            box-shadow: 0 0 0 3px rgba(47, 111, 237, 0.1);
+        }
+        
+        .server-select {
+            appearance: none;
+            background-color: #f9fafb;
+            cursor: pointer;
+        }
+        .server-select-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            pointer-events: none;
+            font-size: 12px;
+        }
+
+        .login-btn {
+            height: 48px;
+            background: #2F6FED;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .login-btn:hover {
+            background: #1e40af;
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #6b7280;
+        }
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .checkbox-input {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            accent-color: #2F6FED;
+        }
+
+        .login-footer {
+            background: #f9fafb;
+            padding: 16px 40px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .lang-select {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .lang-select:hover { background: #e5e7eb; }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #2DBE60;
+            box-shadow: 0 0 0 2px #dcfce7;
+        }
+
+        /* Background decorations */
+        .bg-shape-1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background: #dbeafe;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+        }
+        .bg-shape-2 {
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 400px;
+            height: 400px;
+            background: #e0e7ff;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+        }
+
+        /* Callout Markers */
+        .callout {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: #E5484D;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            z-index: 50;
+        }
+
+        /* Right Panel */
+        .desc-panel {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .desc-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .desc-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .desc-item {
+            display: flex;
+            gap: 12px;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+        .desc-num {
+            width: 24px;
+            height: 24px;
+            background: #fee2e2;
+            color: #E5484D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .scenario-box {
+            background: #eff6ff;
+            border-left: 4px solid #2F6FED;
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 12px;
+        }
+        .scenario-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header -->
+<header class="slide-header">
+<div class="header-title">
+<span class="header-number">12</span>
+<span>로그인 (Login &amp; Authentication)</span>
+</div>
+<div class="text-right">
+<p class="text-gray-500 text-sm font-medium">Building Control System UI Project</p>
+<p class="text-gray-400 text-xs">Page 12 / 15</p>
+</div>
+</header>
+<!-- Main Content -->
+<div class="content-area">
+<!-- Left: UI Mockup -->
+<div class="ui-mockup-wrapper">
+<div class="login-screen">
+<div class="bg-shape-1"></div>
+<div class="bg-shape-2"></div>
+<div class="login-card">
+<div class="login-header">
+<div class="brand-logo">
+<i class="fas fa-building"></i>
+</div>
+<h2 class="text-2xl font-bold text-gray-800">Welcome Back</h2>
+<p class="text-sm text-gray-500 mt-2">빌딩 제어 시스템에 접속합니다.</p>
+</div>
+<div class="login-body">
+<!-- Server Select -->
+<div class="form-group">
+<label class="form-label">접속 서버 (Server)</label>
+<div class="input-wrapper">
+<i class="fas fa-server input-icon"></i>
+<select class="form-input server-select">
+<option selected="">Main Server (192.168.0.10)</option>
+<option>Backup Server (192.168.0.11)</option>
+<option>Test Server (Localhost)</option>
+</select>
+<i class="fas fa-chevron-down server-select-icon"></i>
+</div>
+</div>
+<!-- ID/PW -->
+<div class="form-group">
+<label class="form-label">아이디 (ID)</label>
+<div class="input-wrapper">
+<i class="fas fa-user input-icon"></i>
+<input class="form-input" placeholder="사용자 아이디를 입력하세요" type="text" value="manager01"/>
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">비밀번호 (Password)</label>
+<div class="input-wrapper">
+<i class="fas fa-lock input-icon"></i>
+<input class="form-input" placeholder="비밀번호를 입력하세요" type="password" value="********"/>
+<i class="fas fa-eye absolute right-3 top-3.5 text-gray-400 cursor-pointer hover:text-gray-600"></i>
+</div>
+</div>
+<!-- MFA Option -->
+<div class="form-group">
+<label class="form-label">
+                                    MFA 인증 코드
+                                    <span class="text-xs text-blue-500 font-normal bg-blue-50 px-2 py-0.5 rounded">Optional</span>
+</label>
+<div class="input-wrapper">
+<i class="fas fa-shield-alt input-icon"></i>
+<input class="form-input" placeholder="OTP 6자리 (필요 시 입력)" type="text"/>
+</div>
+</div>
+<!-- Options -->
+<div class="login-options">
+<label class="checkbox-wrapper">
+<input class="checkbox-input" type="checkbox"/>
+<span>자동 로그인</span>
+</label>
+<a class="text-blue-600 hover:underline cursor-pointer">비밀번호 재설정</a>
+</div>
+<!-- Submit -->
+<button class="login-btn">
+                            로그인 (Sign In)
+                            <i class="fas fa-arrow-right"></i>
+</button>
+</div>
+<div class="login-footer">
+<div class="lang-select">
+<i class="fas fa-globe text-gray-400"></i>
+<span>한국어 (Korean)</span>
+<i class="fas fa-caret-down text-xs text-gray-400"></i>
+</div>
+<div class="status-indicator">
+<div class="status-dot"></div>
+<span class="font-medium text-green-600">System Online</span>
+<span class="text-gray-400 mx-1">|</span>
+<span>v2.5.1</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Callouts -->
+<div class="callout" style="top: 360px; left: 630px;">1</div>
+<div class="callout" style="top: 450px; left: 630px;">2</div>
+<div class="callout" style="top: 610px; left: 630px;">3</div>
+<div class="callout" style="bottom: 230px; left: 600px;">4</div>
+<!-- Right: Description -->
+<div class="desc-panel">
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-list-ul text-blue-600"></i>
+<span>화면 구성 요소</span>
+</div>
+<div class="desc-list">
+<div class="desc-item">
+<div class="desc-num">1</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">서버 선택 (Multi-Server)</p>
+<p class="text-xs text-gray-500">
+                                메인 서버 장애 시 백업 서버로 즉시 전환하거나, 테스트 환경으로 접속할 수 있는 드롭다운 메뉴.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">2</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">보안 로그인 (MFA)</p>
+<p class="text-xs text-gray-500">
+                                기본 ID/PW 인증 외에 외부 접속 또는 관리자 계정 접근 시 OTP 코드를 추가로 요구하는 MFA 필드.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">3</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">자동 로그인 및 옵션</p>
+<p class="text-xs text-gray-500">
+                                공용 PC가 아닌 경우 재접속 편의를 위한 자동 로그인 옵션과 비밀번호 분실 시 복구 링크 제공.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">4</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">시스템 상태 바</p>
+<p class="text-xs text-gray-500">
+                                로그인 시도 전 서버와의 통신 연결 상태(Ping)와 클라이언트 버전을 하단에 표시하여 문제 진단 용이.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-mouse-pointer text-blue-600"></i>
+<span>핵심 시나리오</span>
+</div>
+<div class="scenario-box">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#1. 최초 로그인 및 서버 설정</h4>
+<div class="scenario-step">
+<i class="fas fa-server text-blue-500 w-4"></i>
+<span>'Main Server' 선택 후 연결 상태 'Online' 확인</span>
+</div>
+<div class="scenario-step">
+<i class="fas fa-key text-gray-500 w-4"></i>
+<span>관리자 계정 입력 후 로그인 버튼 클릭</span>
+</div>
+</div>
+<div class="scenario-box mb-0">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#2. MFA 추가 인증 (보안 강화)</h4>
+<div class="scenario-step">
+<i class="fas fa-shield-alt text-purple-600 w-4"></i>
+<span>외부망 접속 감지 -&gt; OTP 입력 필드 활성화</span>
+</div>
+<div class="scenario-step">
+<i class="fas fa-mobile-alt text-blue-500 w-4"></i>
+<span>모바일 앱에서 생성된 6자리 코드 입력 후 접속</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

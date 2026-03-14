@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>모니터링 - 출입통제</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Style */
+        .slide-header {
+            height: 120px;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            background: #ffffff;
+            z-index: 10;
+        }
+        .header-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header-number {
+            color: #2F6FED;
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            padding: 40px 80px;
+            gap: 50px;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        /* Left: UI Mockup */
+        .ui-mockup-wrapper {
+            flex: 2.2;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 8px solid #374151; /* Monitor Bezel */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .app-bar {
+            height: 50px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .main-layout {
+            flex: 1;
+            display: flex;
+            background: #f3f4f6;
+            overflow: hidden;
+        }
+
+        /* Navigation Sidebar */
+        .sidebar {
+            width: 60px;
+            background: #1f2937;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+            gap: 15px;
+            z-index: 20;
+        }
+        .sidebar-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sidebar-icon:hover { background: #374151; color: white; }
+        .sidebar-icon.active { background: #2F6FED; color: white; }
+
+        /* Tree Sidebar */
+        .tree-sidebar {
+            width: 220px;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+        }
+        .tree-header {
+            padding: 15px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .search-box {
+            background: #f3f4f6;
+            border-radius: 4px;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .tree-content {
+            padding: 10px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .tree-item {
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #4b5563;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .tree-item:hover { background: #f3f4f6; }
+        .tree-item.selected { background: #eff6ff; color: #2F6FED; font-weight: 600; }
+        .tree-indent { margin-left: 20px; }
+
+        /* Main Content Grid */
+        .detail-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #f9fafb;
+            position: relative;
+            overflow: hidden;
+        }
+        .filter-bar {
+            padding: 12px 20px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Access Control Specific Layout */
+        .access-dashboard {
+            flex: 1;
+            padding: 20px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 16px;
+            overflow-y: auto;
+        }
+
+        /* Top Metrics Row */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .metric-card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+        .metric-blue::after { background: #2F6FED; }
+        .metric-green::after { background: #2DBE60; }
+        .metric-red::after { background: #E5484D; }
+        .metric-orange::after { background: #F5A524; }
+        
+        /* Map & Grid Row */
+        .visual-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+            min-height: 0; /* For flex/grid scrolling */
+        }
+        
+        /* Map Container */
+        .map-container {
+            background: #e5e7eb;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            position: relative;
+            overflow: hidden;
+            background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .floor-plan {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 70%;
+            border: 4px solid #9ca3af;
+            background: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .room-block {
+            position: absolute;
+            border: 2px solid #e5e7eb;
+            background: #f9fafb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #9ca3af;
+            font-weight: bold;
+        }
+        
+        /* Door Icon on Map */
+        .door-marker {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 10;
+            transition: transform 0.2s;
+        }
+        .door-marker:hover { transform: scale(1.2); }
+        .door-locked { background: #2F6FED; }
+        .door-open { background: #2DBE60; }
+        .door-forced { background: #E5484D; animation: pulse 1s infinite; }
+        .door-maintenance { background: #F5A524; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(229, 72, 77, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(229, 72, 77, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(229, 72, 77, 0); }
+        }
+
+        /* Event Grid */
+        .event-panel {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .panel-header {
+            padding: 10px 15px;
+            border-bottom: 1px solid #f3f4f6;
+            font-weight: bold;
+            font-size: 13px;
+            color: #374151;
+            display: flex;
+            justify-content: space-between;
+        }
+        .event-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+        .event-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            gap: 10px;
+            align-items: start;
+        }
+        .event-item:last-child { border-bottom: none; }
+        .event-time { font-size: 11px; color: #9ca3af; min-width: 45px; }
+        .event-content { flex: 1; }
+        .event-title { font-size: 12px; font-weight: 600; color: #1f2937; }
+        .event-desc { font-size: 11px; color: #6b7280; }
+
+        /* Timeline Row */
+        .timeline-row {
+            height: 140px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        .chart-container {
+            flex: 1;
+            position: relative;
+        }
+
+        /* Right Drawer */
+        .detail-drawer {
+            width: 280px;
+            background: white;
+            border-left: 1px solid #e5e7eb;
+            box-shadow: -4px 0 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            z-index: 30;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+        .drawer-header {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+        .camera-view {
+            height: 150px;
+            background: #000;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4b5563;
+            font-size: 12px;
+            position: relative;
+        }
+        .camera-overlay {
+            position: absolute;
+            top: 5px; left: 5px;
+            color: white;
+            background: rgba(0,0,0,0.5);
+            padding: 2px 5px;
+            border-radius: 2px;
+            font-size: 10px;
+        }
+        .control-btn {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: #2F6FED; color: white; border: none; }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-danger { background: white; color: #E5484D; border: 1px solid #E5484D; }
+        .btn-danger:hover { background: #fee2e2; }
+
+        /* Callout Markers */
+        .callout {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: #E5484D;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            z-index: 50;
+        }
+
+        /* Right: Description */
+        .desc-panel {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .desc-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .desc-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .desc-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .desc-item {
+            display: flex;
+            gap: 12px;
+            align-items: start;
+        }
+        .desc-num {
+            width: 24px;
+            height: 24px;
+            background: #fee2e2;
+            color: #E5484D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .scenario-box {
+            background: #eff6ff;
+            border-left: 4px solid #2F6FED;
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+        }
+        .scenario-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #374151;
+        }
+        .step-arrow { color: #9ca3af; font-size: 12px; }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header -->
+<header class="slide-header">
+<div class="header-title">
+<span class="header-number">06</span>
+<span>모니터링 — 출입통제</span>
+</div>
+<div class="text-right">
+<p class="text-gray-500 text-sm font-medium">Building Control System UI Project</p>
+<p class="text-gray-400 text-xs">Page 06 / 15</p>
+</div>
+</header>
+<!-- Main Content -->
+<div class="content-area">
+<!-- Left: UI Mockup -->
+<div class="ui-mockup-wrapper">
+<!-- App Bar -->
+<div class="app-bar">
+<div class="flex items-center gap-4">
+<i class="fas fa-bars text-gray-500"></i>
+<span class="font-bold text-lg text-blue-600">BMS <span class="text-gray-600 font-normal text-sm">| Twin Tower A</span></span>
+</div>
+<div class="flex items-center gap-4 text-gray-500 text-sm">
+<span><i class="far fa-clock"></i> 2026-03-11 14:35:05</span>
+<div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"><i class="fas fa-user"></i></div>
+</div>
+</div>
+<!-- Body -->
+<div class="main-layout">
+<!-- Nav Sidebar -->
+<div class="sidebar">
+<div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div>
+<div class="sidebar-icon"><i class="fas fa-building"></i></div>
+<div class="sidebar-icon active"><i class="fas fa-door-open"></i></div>
+<div class="sidebar-icon"><i class="fas fa-bolt"></i></div>
+<div class="sidebar-icon" style="margin-top: auto;"><i class="fas fa-cog"></i></div>
+</div>
+<!-- Tree Sidebar -->
+<div class="tree-sidebar">
+<div class="tree-header">
+<div class="search-box">
+<i class="fas fa-search"></i>
+<span>구역 검색...</span>
+</div>
+</div>
+<div class="tree-content">
+<div class="tree-item"><i class="fas fa-building text-blue-500"></i> Twin Tower A</div>
+<div class="tree-item tree-indent"><i class="fas fa-map-marker-alt text-gray-400"></i> 정문/로비</div>
+<div class="tree-item tree-indent"><i class="fas fa-map-marker-alt text-gray-400"></i> 지하 주차장</div>
+<div class="tree-item tree-indent selected"><i class="fas fa-map-marker-alt text-blue-500"></i> 공용부 (1F-3F)</div>
+<div class="tree-item tree-indent" style="margin-left: 40px;"><i class="far fa-square text-gray-400"></i> 계단실 1</div>
+<div class="tree-item tree-indent" style="margin-left: 40px;"><i class="far fa-square text-blue-500"></i> 중앙 복도</div>
+<div class="tree-item tree-indent"><i class="fas fa-map-marker-alt text-gray-400"></i> 엘리베이터 홀</div>
+</div>
+</div>
+<!-- Detail Content (Access Control Dashboard) -->
+<div class="detail-content">
+<!-- Filter Bar -->
+<div class="filter-bar">
+<div class="flex items-center gap-3">
+<h2 class="font-bold text-gray-800">공용부 보안 현황</h2>
+<span class="bg-gray-200 text-gray-600 text-xs px-2 py-0.5 rounded-full font-bold">Total: 42 Devices</span>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-white border border-gray-300 rounded text-xs text-gray-600 flex items-center gap-2">
+<i class="fas fa-layer-group"></i> 층별 보기
+                                </button>
+<button class="px-3 py-1 bg-white border border-gray-300 rounded text-xs text-gray-600 flex items-center gap-2">
+<i class="fas fa-filter"></i> 장치 필터
+                                </button>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="access-dashboard">
+<!-- Row 1: Metrics -->
+<div class="metrics-row">
+<div class="metric-card metric-blue">
+<span class="text-xs text-gray-500">전체 도어</span>
+<div class="flex justify-between items-end">
+<span class="text-2xl font-bold text-gray-800">38</span>
+<i class="fas fa-door-closed text-gray-300 text-xl"></i>
+</div>
+</div>
+<div class="metric-card metric-green">
+<span class="text-xs text-gray-500">정상 잠김</span>
+<div class="flex justify-between items-end">
+<span class="text-2xl font-bold text-green-600">32</span>
+<span class="text-xs text-green-600 bg-green-100 px-1.5 py-0.5 rounded">84%</span>
+</div>
+</div>
+<div class="metric-card metric-red">
+<span class="text-xs text-gray-500">알람/강제개방</span>
+<div class="flex justify-between items-end">
+<span class="text-2xl font-bold text-red-600">1</span>
+<span class="animate-ping absolute top-2 right-2 h-2 w-2 rounded-full bg-red-400 opacity-75"></span>
+</div>
+</div>
+<div class="metric-card metric-orange">
+<span class="text-xs text-gray-500">엘리베이터</span>
+<div class="flex justify-between items-end">
+<div class="flex gap-2 items-center">
+<span class="text-2xl font-bold text-gray-800">4</span>
+<span class="text-xs text-gray-400">대 운행중</span>
+</div>
+<i class="fas fa-arrow-up text-blue-500"></i>
+</div>
+</div>
+</div>
+<!-- Row 2: Map & Grid -->
+<div class="visual-row">
+<!-- Map -->
+<div class="map-container">
+<div class="absolute top-2 left-2 z-10 bg-white/80 backdrop-blur px-2 py-1 rounded text-xs font-bold text-gray-600">
+                                            Main Corridor - 1F
+                                        </div>
+<div class="floor-plan">
+<div class="room-block" style="top: 10%; left: 10%; width: 30%; height: 30%;">Conf A</div>
+<div class="room-block" style="top: 10%; left: 60%; width: 30%; height: 30%;">Conf B</div>
+<div class="room-block" style="bottom: 10%; left: 10%; width: 30%; height: 30%;">Office</div>
+<div class="room-block" style="bottom: 10%; left: 60%; width: 30%; height: 30%;">Server</div>
+<!-- Doors -->
+<div class="door-marker door-locked" style="top: 40%; left: 25%;" title="D-101"><i class="fas fa-lock"></i></div>
+<div class="door-marker door-locked" style="top: 40%; left: 75%;" title="D-102"><i class="fas fa-lock"></i></div>
+<div class="door-marker door-open" style="top: 60%; left: 25%;" title="D-103"><i class="fas fa-door-open"></i></div>
+<!-- Forced Open Door -->
+<div class="door-marker door-forced" style="top: 60%; left: 75%;" title="D-104"><i class="fas fa-exclamation"></i></div>
+<div class="door-marker door-maintenance" style="top: 50%; left: 0%; transform: translate(-50%, -50%);" title="D-MAIN"><i class="fas fa-tools"></i></div>
+</div>
+</div>
+<!-- Event Grid -->
+<div class="event-panel">
+<div class="panel-header">
+<span>실시간 이벤트</span>
+<i class="fas fa-sync-alt text-gray-400 cursor-pointer hover:text-blue-500"></i>
+</div>
+<div class="event-list">
+<div class="event-item bg-red-50">
+<div class="event-time">14:35</div>
+<div class="event-content">
+<div class="event-title text-red-600">강제 개방 알림</div>
+<div class="event-desc">D-104 (Server Room)</div>
+</div>
+</div>
+<div class="event-item">
+<div class="event-time">14:32</div>
+<div class="event-content">
+<div class="event-title">정상 출입 (Card)</div>
+<div class="event-desc">김철수 (D-103)</div>
+</div>
+</div>
+<div class="event-item">
+<div class="event-time">14:30</div>
+<div class="event-content">
+<div class="event-title">도어 잠김</div>
+<div class="event-desc">D-102 (Conf B)</div>
+</div>
+</div>
+<div class="event-item">
+<div class="event-time">14:28</div>
+<div class="event-content">
+<div class="event-title">출입 거부 (권한없음)</div>
+<div class="event-desc">방문객 (D-104)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 3: Timeline -->
+<div class="timeline-row">
+<div class="flex justify-between items-center mb-2">
+<h3 class="text-xs font-bold text-gray-600">시간대별 출입 현황 (Today)</h3>
+<div class="flex gap-2 text-xs">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span>정상</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500"></span>거부/알람</span>
+</div>
+</div>
+<div class="chart-container">
+<canvas id="accessChart"></canvas>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Drawer (Detail) -->
+<div class="detail-drawer">
+<div class="drawer-header">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-bold text-lg text-gray-900">D-104 Server Room</h3>
+<p class="text-xs text-red-500 font-bold"><i class="fas fa-exclamation-triangle"></i> 강제 개방 상태</p>
+</div>
+<button class="text-gray-400 hover:text-gray-600"><i class="fas fa-times"></i></button>
+</div>
+</div>
+<div class="p-4 overflow-y-auto flex-1">
+<div class="camera-view">
+<span class="text-gray-500"><i class="fas fa-video-slash"></i> No Signal</span>
+<div class="camera-overlay">CAM-04 Live</div>
+</div>
+<div class="mb-4">
+<p class="text-xs font-bold text-gray-500 mb-2">빠른 제어</p>
+<button class="control-btn btn-primary"><i class="fas fa-lock mr-2"></i>원격 잠금 (Force Lock)</button>
+<button class="control-btn btn-danger"><i class="fas fa-unlock mr-2"></i>비상 개방 (Emergency)</button>
+</div>
+<div class="mb-4">
+<p class="text-xs font-bold text-gray-500 mb-2">상세 정보</p>
+<div class="text-xs space-y-2">
+<div class="flex justify-between"><span class="text-gray-400">장치 ID</span> <span>AC-SRV-04</span></div>
+<div class="flex justify-between"><span class="text-gray-400">마지막 상태</span> <span class="text-red-600">Forced Open</span></div>
+<div class="flex justify-between"><span class="text-gray-400">발생 시간</span> <span>14:35:02</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Callouts -->
+<div class="callout" style="top: 350px; left: 450px;">1</div>
+<div class="callout" style="top: 400px; right: 400px;">2</div>
+<div class="callout" style="top: 250px; right: 400px;">3</div>
+<div class="callout" style="bottom: 120px; left: 600px;">4</div>
+<!-- Right: Description -->
+<div class="desc-panel">
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-list-ul text-blue-600"></i>
+<span>화면 구성 요소</span>
+</div>
+<div class="desc-list">
+<div class="desc-item">
+<div class="desc-num">1</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">영역 맵 (Area Map)</p>
+<p class="text-xs text-gray-500">
+                                도면 기반의 직관적 시각화. 도어 아이콘 색상(잠금/개방/강제개방)으로 상태 즉시 파악.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">2</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">이벤트 그리드</p>
+<p class="text-xs text-gray-500">
+                                실시간 출입 및 알람 로그 리스트. 중요 알람(강제 개방 등)은 배경색 강조.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">3</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">장치 상태 분포</p>
+<p class="text-xs text-gray-500">
+                                전체 도어 및 엘리베이터의 상태(정상/알람/점검)를 KPI 카드로 요약 표시.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">4</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">출입 타임라인</p>
+<p class="text-xs text-gray-500">
+                                시간대별 출입량 및 거부/알람 빈도를 그래프로 표현하여 패턴 분석 지원.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-mouse-pointer text-blue-600"></i>
+<span>핵심 시나리오</span>
+</div>
+<div class="scenario-box">
+<h4 class="font-bold text-sm text-blue-900 mb-3">#1. 강제 개방 알람 대응</h4>
+<div class="scenario-step">
+<i class="fas fa-bell text-red-500 w-4"></i>
+<span>영역 맵에서 점멸하는 붉은 아이콘(D-104) 클릭</span>
+</div>
+<div class="pl-5 mb-2"><i class="fas fa-arrow-down step-arrow"></i></div>
+<div class="scenario-step">
+<i class="fas fa-video text-gray-500 w-4"></i>
+<span>우측 드로어에서 연동 CCTV 영상 확인</span>
+</div>
+<div class="pl-5 mb-2"><i class="fas fa-arrow-down step-arrow"></i></div>
+<div class="scenario-step">
+<i class="fas fa-lock text-blue-500 w-4"></i>
+<span>상황 파악 후 '원격 잠금' 명령 실행</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+    // Access Timeline Chart
+    const ctx = document.getElementById('accessChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'],
+            datasets: [
+                {
+                    label: '정상 출입',
+                    data: [45, 30, 25, 60, 55, 40, 0],
+                    backgroundColor: '#2F6FED',
+                    borderRadius: 4,
+                },
+                {
+                    label: '거부/알람',
+                    data: [2, 0, 1, 3, 1, 5, 0],
+                    backgroundColor: '#E5484D',
+                    borderRadius: 4,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#f3f4f6' }, ticks: { font: { size: 10 } } },
+                x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+            },
+            barThickness: 20
+        }
+    });
+</script>
+</body>
+</html>

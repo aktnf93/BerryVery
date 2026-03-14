@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>등록 - 설비/구역</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Style */
+        .slide-header {
+            height: 120px;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            background: #ffffff;
+            z-index: 10;
+        }
+        .header-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header-number {
+            color: #2F6FED;
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            padding: 40px 80px;
+            gap: 50px;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        /* Left: UI Mockup */
+        .ui-mockup-wrapper {
+            flex: 2.2;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 8px solid #374151; /* Monitor Bezel */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .app-bar {
+            height: 50px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .main-layout {
+            flex: 1;
+            display: flex;
+            background: #f3f4f6;
+            overflow: hidden;
+        }
+
+        /* Navigation Sidebar */
+        .sidebar {
+            width: 60px;
+            background: #1f2937;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+            gap: 15px;
+            z-index: 20;
+        }
+        .sidebar-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sidebar-icon:hover { background: #374151; color: white; }
+        .sidebar-icon.active { background: #2F6FED; color: white; }
+
+        /* Configuration Panels */
+        .config-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Left Config Sidebar (Tree & Gateway) */
+        .config-sidebar {
+            width: 320px;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .section-header {
+            padding: 15px;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9fafb;
+        }
+        .section-title { font-size: 14px; font-weight: 700; color: #374151; }
+        
+        .tree-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        .tree-node {
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #4b5563;
+            cursor: pointer;
+            margin-bottom: 2px;
+        }
+        .tree-node:hover { background: #f3f4f6; }
+        .tree-node.active { background: #eff6ff; color: #2F6FED; font-weight: 600; }
+        .tree-indent-1 { margin-left: 20px; }
+        .tree-indent-2 { margin-left: 40px; }
+
+        .gateway-form {
+            padding: 20px;
+            border-top: 1px solid #e5e7eb;
+            background: #fff;
+        }
+        .form-group { margin-bottom: 12px; }
+        .form-label { display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px; font-weight: 500; }
+        .form-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #111827;
+        }
+        .form-select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #111827;
+            background-color: white;
+        }
+
+        /* Main Table Area */
+        .main-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #f9fafb;
+            padding: 24px;
+            gap: 20px;
+            overflow: hidden;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .data-table-wrapper {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .data-table-header {
+            display: grid;
+            grid-template-columns: 40px 1fr 100px 120px 100px 100px 100px 80px;
+            background: #f3f4f6;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 12px;
+            font-weight: 700;
+            color: #4b5563;
+        }
+        .header-cell { padding: 12px; display: flex; align-items: center; }
+        
+        .data-table-body {
+            overflow-y: auto;
+            flex: 1;
+        }
+        .data-row {
+            display: grid;
+            grid-template-columns: 40px 1fr 100px 120px 100px 100px 100px 80px;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 13px;
+            color: #1f2937;
+            transition: background 0.1s;
+        }
+        .data-row:hover { background: #f9fafb; }
+        .data-row.selected { background: #eff6ff; }
+        .data-row.error { background: #fef2f2; }
+        .cell { padding: 8px 12px; display: flex; align-items: center; }
+        
+        .input-cell {
+            width: 100%;
+            padding: 4px 8px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            background: transparent;
+            font-size: 13px;
+        }
+        .input-cell:focus, .data-row:hover .input-cell {
+            background: white;
+            border-color: #d1d5db;
+        }
+        .input-cell:focus { outline: 2px solid #2F6FED; border-color: transparent; }
+
+        /* Validation Panel */
+        .validation-panel {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Status Badges */
+        .badge {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .badge-success { background: #dcfce7; color: #166534; }
+        .badge-error { background: #fee2e2; color: #991b1b; }
+        .badge-gray { background: #f3f4f6; color: #4b5563; }
+
+        /* Callout Markers */
+        .callout {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: #E5484D;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            z-index: 50;
+        }
+
+        /* Right Panel */
+        .desc-panel {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .desc-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .desc-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .desc-item {
+            display: flex;
+            gap: 12px;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+        .desc-num {
+            width: 24px;
+            height: 24px;
+            background: #fee2e2;
+            color: #E5484D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .scenario-box {
+            background: #eff6ff;
+            border-left: 4px solid #2F6FED;
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 12px;
+        }
+        .scenario-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #374151;
+        }
+        .step-arrow { color: #9ca3af; font-size: 12px; }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header -->
+<header class="slide-header">
+<div class="header-title">
+<span class="header-number">10</span>
+<span>등록 — 설비/구역</span>
+</div>
+<div class="text-right">
+<p class="text-gray-500 text-sm font-medium">Building Control System UI Project</p>
+<p class="text-gray-400 text-xs">Page 10 / 15</p>
+</div>
+</header>
+<!-- Main Content -->
+<div class="content-area">
+<!-- Left: UI Mockup -->
+<div class="ui-mockup-wrapper">
+<!-- App Bar -->
+<div class="app-bar">
+<div class="flex items-center gap-4">
+<i class="fas fa-bars text-gray-500"></i>
+<span class="font-bold text-lg text-blue-600">BMS <span class="text-gray-600 font-normal text-sm">| Twin Tower A</span></span>
+</div>
+<div class="flex items-center gap-4 text-gray-500 text-sm">
+<span><i class="far fa-clock"></i> 2026-03-11 14:40:00</span>
+<div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"><i class="fas fa-tools"></i></div>
+</div>
+</div>
+<!-- Body -->
+<div class="main-layout">
+<!-- Nav Sidebar -->
+<div class="sidebar">
+<div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div>
+<div class="sidebar-icon"><i class="fas fa-building"></i></div>
+<div class="sidebar-icon"><i class="fas fa-sliders-h"></i></div>
+<div class="sidebar-icon active"><i class="fas fa-cog"></i></div>
+</div>
+<!-- Config Container -->
+<div class="config-container">
+<!-- Sidebar: Network Tree -->
+<div class="config-sidebar">
+<div class="section-header">
+<span class="section-title">네트워크 구성</span>
+<div class="flex gap-1">
+<button class="w-6 h-6 flex items-center justify-center rounded hover:bg-gray-200 text-gray-500"><i class="fas fa-plus text-xs"></i></button>
+<button class="w-6 h-6 flex items-center justify-center rounded hover:bg-gray-200 text-gray-500"><i class="fas fa-sync-alt text-xs"></i></button>
+</div>
+</div>
+<div class="tree-content">
+<div class="tree-node"><i class="fas fa-globe text-blue-500"></i> System Root</div>
+<div class="tree-node tree-indent-1"><i class="fas fa-network-wired text-gray-500"></i> BACnet Network</div>
+<div class="tree-node tree-indent-2 active"><i class="fas fa-server text-green-500"></i> Gateway_01 (B1)</div>
+<div class="tree-node tree-indent-2"><i class="fas fa-server text-gray-400"></i> Gateway_02 (1F)</div>
+<div class="tree-node tree-indent-1"><i class="fas fa-network-wired text-gray-500"></i> Modbus TCP</div>
+<div class="tree-node tree-indent-2"><i class="fas fa-server text-gray-400"></i> Meter_Gateway</div>
+</div>
+<!-- Gateway Form -->
+<div class="gateway-form">
+<h4 class="font-bold text-sm text-gray-800 mb-3 flex items-center gap-2">
+<i class="fas fa-sliders-h text-blue-500"></i> 게이트웨이 설정
+                            </h4>
+<div class="form-group">
+<label class="form-label">Device Name</label>
+<input class="form-input" type="text" value="Gateway_01 (B1)"/>
+</div>
+<div class="form-group">
+<label class="form-label">Protocol</label>
+<select class="form-select">
+<option>BACnet/IP</option>
+<option>Modbus TCP</option>
+</select>
+</div>
+<div class="flex gap-2">
+<div class="form-group flex-1">
+<label class="form-label">IP Address</label>
+<input class="form-input" type="text" value="192.168.10.20"/>
+</div>
+<div class="form-group w-20">
+<label class="form-label">Port</label>
+<input class="form-input" type="text" value="47808"/>
+</div>
+</div>
+<button class="w-full py-2 bg-white border border-green-500 text-green-600 rounded text-sm font-bold mt-2 hover:bg-green-50 flex items-center justify-center gap-2">
+<i class="fas fa-plug"></i> Connection Test
+                            </button>
+</div>
+</div>
+<!-- Main Panel: Mapping Table -->
+<div class="main-panel">
+<!-- Toolbar -->
+<div class="toolbar">
+<div>
+<h2 class="text-xl font-bold text-gray-800">포인트 매핑 (Point Mapping)</h2>
+<p class="text-xs text-gray-500">Gateway_01 하위 장치 및 포인트 설정</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 bg-white border border-gray-300 rounded text-xs font-medium text-gray-600 hover:bg-gray-50 flex items-center gap-2">
+<i class="fas fa-file-upload"></i> CSV 가져오기
+                                </button>
+<button class="px-3 py-1.5 bg-white border border-gray-300 rounded text-xs font-medium text-gray-600 hover:bg-gray-50 flex items-center gap-2">
+<i class="fas fa-file-download"></i> 내보내기
+                                </button>
+<button class="px-4 py-1.5 bg-blue-600 text-white rounded text-xs font-bold hover:bg-blue-700 flex items-center gap-2 shadow-sm">
+<i class="fas fa-save"></i> 저장
+                                </button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="data-table-wrapper">
+<div class="data-table-header">
+<div class="header-cell"><input type="checkbox"/></div>
+<div class="header-cell">Point Name</div>
+<div class="header-cell">Type</div>
+<div class="header-cell">Address (ID)</div>
+<div class="header-cell">Unit</div>
+<div class="header-cell">Scale</div>
+<div class="header-cell">Offset</div>
+<div class="header-cell">Status</div>
+</div>
+<div class="data-table-body">
+<div class="data-row selected">
+<div class="cell"><input checked="" type="checkbox"/></div>
+<div class="cell"><input class="input-cell" type="text" value="AHU_01_Temp_SA"/></div>
+<div class="cell"><span class="badge badge-gray">AI</span></div>
+<div class="cell"><input class="input-cell" type="text" value="30001"/></div>
+<div class="cell"><input class="input-cell" type="text" value="°C"/></div>
+<div class="cell"><input class="input-cell" type="text" value="0.1"/></div>
+<div class="cell"><input class="input-cell" type="text" value="0.0"/></div>
+<div class="cell"><span class="badge badge-success">Good</span></div>
+</div>
+<div class="data-row">
+<div class="cell"><input type="checkbox"/></div>
+<div class="cell"><input class="input-cell" type="text" value="AHU_01_Fan_Status"/></div>
+<div class="cell"><span class="badge badge-gray">DI</span></div>
+<div class="cell"><input class="input-cell" type="text" value="10001"/></div>
+<div class="cell"><input class="input-cell" type="text" value="On/Off"/></div>
+<div class="cell"><input class="input-cell" type="text" value="1"/></div>
+<div class="cell"><input class="input-cell" type="text" value="0"/></div>
+<div class="cell"><span class="badge badge-success">Good</span></div>
+</div>
+<div class="data-row error">
+<div class="cell"><input type="checkbox"/></div>
+<div class="cell"><input class="input-cell" type="text" value="AHU_01_Valve_Cmd"/></div>
+<div class="cell"><span class="badge badge-gray">AO</span></div>
+<div class="cell"><input class="input-cell font-bold text-red-600" type="text" value="40005"/></div>
+<div class="cell"><input class="input-cell" type="text" value="%"/></div>
+<div class="cell"><input class="input-cell" type="text" value="1"/></div>
+<div class="cell"><input class="input-cell" type="text" value="0"/></div>
+<div class="cell"><span class="badge badge-error">Timeout</span></div>
+</div>
+<div class="data-row">
+<div class="cell"><input type="checkbox"/></div>
+<div class="cell"><input class="input-cell" type="text" value="VAV_102_RoomTemp"/></div>
+<div class="cell"><span class="badge badge-gray">AI</span></div>
+<div class="cell"><input class="input-cell" type="text" value="30012"/></div>
+<div class="cell"><input class="input-cell" type="text" value="°C"/></div>
+<div class="cell"><input class="input-cell" type="text" value="0.1"/></div>
+<div class="cell"><input class="input-cell" type="text" value="0.0"/></div>
+<div class="cell"><span class="badge badge-success">Good</span></div>
+</div>
+</div>
+</div>
+<!-- Validation Panel -->
+<div class="validation-panel">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+<i class="fas fa-exclamation-triangle"></i>
+</div>
+<div>
+<p class="text-sm font-bold text-gray-800">검증 결과: 1개 오류 발견</p>
+<p class="text-xs text-gray-500">중복된 주소 또는 응답 없음 상태의 포인트가 존재합니다.</p>
+</div>
+</div>
+<button class="px-3 py-1.5 text-xs text-blue-600 font-bold border border-blue-200 bg-blue-50 rounded hover:bg-blue-100">
+                                오류 상세 보기
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Callouts -->
+<div class="callout" style="top: 150px; left: 300px;">1</div>
+<div class="callout" style="top: 500px; left: 150px;">2</div>
+<div class="callout" style="top: 300px; right: 300px;">3</div>
+<div class="callout" style="bottom: 150px; right: 300px;">4</div>
+</div>
+<!-- Right: Description -->
+<div class="desc-panel">
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-list-ul text-blue-600"></i>
+<span>화면 구성 요소</span>
+</div>
+<div class="desc-list">
+<div class="desc-item">
+<div class="desc-num">1</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">네트워크 트리 &amp; 게이트웨이</p>
+<p class="text-xs text-gray-500">
+                                BACnet/Modbus 등 프로토콜별 네트워크 구조 관리 및 게이트웨이 IP/Port 설정 폼.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">2</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">연결 테스트 (Ping/Scan)</p>
+<p class="text-xs text-gray-500">
+                                설정된 IP 주소로 통신 테스트를 수행하고, 장비의 Online/Offline 상태를 즉시 확인.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">3</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">포인트 매핑 테이블</p>
+<p class="text-xs text-gray-500">
+                                물리적 주소(Address)와 시스템 포인트 ID를 매핑하고 단위(Unit), 스케일(Scale) 보정값 입력.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">4</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">일괄 등록 &amp; 검증</p>
+<p class="text-xs text-gray-500">
+                                대량의 포인트를 CSV로 업로드하고, 주소 중복이나 통신 오류를 자동 검증하여 피드백 제공.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-mouse-pointer text-blue-600"></i>
+<span>핵심 시나리오</span>
+</div>
+<div class="scenario-box">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#1. 신규 게이트웨이 등록</h4>
+<div class="scenario-step">
+<i class="fas fa-plus-circle text-blue-500 w-4"></i>
+<span>트리에서 '네트워크' 선택 후 추가 버튼 클릭</span>
+</div>
+<div class="scenario-step">
+<i class="fas fa-plug text-green-500 w-4"></i>
+<span>IP/Port 입력 후 'Connection Test'로 통신 확인</span>
+</div>
+</div>
+<div class="scenario-box mb-0">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#2. 엑셀(CSV) 일괄 업로드</h4>
+<div class="scenario-step">
+<i class="fas fa-file-csv text-green-600 w-4"></i>
+<span>'CSV 가져오기'로 포인트 리스트 파일 업로드</span>
+</div>
+<div class="scenario-step">
+<i class="fas fa-check-double text-blue-500 w-4"></i>
+<span>검증 결과 패널에서 오류 확인 후 일괄 수정 및 저장</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>이력 조회</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Style */
+        .slide-header {
+            height: 120px;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            background: #ffffff;
+            z-index: 10;
+        }
+        .header-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header-number {
+            color: #2F6FED;
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            padding: 40px 80px;
+            gap: 50px;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        /* Left: UI Mockup */
+        .ui-mockup-wrapper {
+            flex: 2.2;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 8px solid #374151; /* Monitor Bezel */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .app-bar {
+            height: 50px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .main-layout {
+            flex: 1;
+            display: flex;
+            background: #f3f4f6;
+            overflow: hidden;
+        }
+
+        /* Navigation Sidebar */
+        .sidebar {
+            width: 60px;
+            background: #1f2937;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+            gap: 15px;
+            z-index: 20;
+        }
+        .sidebar-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sidebar-icon:hover { background: #374151; color: white; }
+        .sidebar-icon.active { background: #2F6FED; color: white; }
+
+        /* Main History Panel */
+        .history-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: #f9fafb;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .filter-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .input-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #6b7280;
+        }
+        .input-field {
+            height: 32px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 0 8px;
+            font-size: 13px;
+            color: #374151;
+            background: white;
+            min-width: 140px;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #2F6FED;
+            box-shadow: 0 0 0 1px #2F6FED;
+        }
+        
+        /* Table Section */
+        .table-container {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .table-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .result-count {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .custom-table {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .table-header {
+            display: grid;
+            grid-template-columns: 50px 140px 100px 150px 1fr 100px 100px;
+            background: #f3f4f6;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 12px;
+            font-weight: 700;
+            color: #4b5563;
+        }
+        .header-cell { padding: 10px 12px; display: flex; align-items: center; }
+        
+        .table-body {
+            overflow-y: auto;
+            flex: 1;
+        }
+        .table-row {
+            display: grid;
+            grid-template-columns: 50px 140px 100px 150px 1fr 100px 100px;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 13px;
+            color: #1f2937;
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+        .table-row:hover { background: #f9fafb; }
+        .table-row.selected { background: #eff6ff; border-left: 3px solid #2F6FED; }
+        .cell { padding: 10px 12px; display: flex; align-items: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* Detail Drawer */
+        .detail-drawer {
+            width: 350px;
+            background: white;
+            border-left: 1px solid #e5e7eb;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            z-index: 30;
+        }
+        .drawer-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .drawer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .detail-group {
+            margin-bottom: 24px;
+        }
+        .detail-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #9ca3af;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .detail-value {
+            font-size: 13px;
+            color: #1f2937;
+            line-height: 1.5;
+        }
+        .code-block {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 11px;
+            overflow-x: auto;
+            margin-top: 8px;
+        }
+
+        /* Badges */
+        .badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .badge-control { background: #dbeafe; color: #1e40af; }
+        .badge-alarm { background: #fee2e2; color: #991b1b; }
+        .badge-system { background: #f3f4f6; color: #374151; }
+        .badge-success { background: #dcfce7; color: #166534; }
+        .badge-fail { background: #fef2f2; color: #b91c1c; }
+
+        /* Callout Markers */
+        .callout {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: #E5484D;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            z-index: 50;
+        }
+
+        /* Right Panel */
+        .desc-panel {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .desc-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .desc-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .desc-item {
+            display: flex;
+            gap: 12px;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+        .desc-num {
+            width: 24px;
+            height: 24px;
+            background: #fee2e2;
+            color: #E5484D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .scenario-box {
+            background: #eff6ff;
+            border-left: 4px solid #2F6FED;
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 12px;
+        }
+        .scenario-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header -->
+<header class="slide-header">
+<div class="header-title">
+<span class="header-number">11</span>
+<span>이력 조회 (History &amp; Logs)</span>
+</div>
+<div class="text-right">
+<p class="text-gray-500 text-sm font-medium">Building Control System UI Project</p>
+<p class="text-gray-400 text-xs">Page 11 / 15</p>
+</div>
+</header>
+<!-- Main Content -->
+<div class="content-area">
+<!-- Left: UI Mockup -->
+<div class="ui-mockup-wrapper">
+<!-- App Bar -->
+<div class="app-bar">
+<div class="flex items-center gap-4">
+<i class="fas fa-bars text-gray-500"></i>
+<span class="font-bold text-lg text-blue-600">BMS <span class="text-gray-600 font-normal text-sm">| Twin Tower A</span></span>
+</div>
+<div class="flex items-center gap-4 text-gray-500 text-sm">
+<span><i class="far fa-clock"></i> 2026-03-11 15:10:24</span>
+<div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"><i class="fas fa-history"></i></div>
+</div>
+</div>
+<!-- Body -->
+<div class="main-layout">
+<!-- Nav Sidebar -->
+<div class="sidebar">
+<div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div>
+<div class="sidebar-icon"><i class="fas fa-building"></i></div>
+<div class="sidebar-icon"><i class="fas fa-sliders-h"></i></div>
+<div class="sidebar-icon active"><i class="fas fa-list-alt"></i></div>
+<div class="sidebar-icon" style="margin-top: auto;"><i class="fas fa-cog"></i></div>
+</div>
+<!-- History Panel -->
+<div class="history-panel">
+<!-- Filter Bar -->
+<div class="filter-section">
+<div class="filter-row">
+<div class="input-group">
+<label class="input-label">기간 (Period)</label>
+<div class="flex items-center gap-2">
+<input class="input-field" type="date" value="2026-03-11"/>
+<span class="text-gray-400">~</span>
+<input class="input-field" type="date" value="2026-03-11"/>
+</div>
+</div>
+<div class="input-group">
+<label class="input-label">유형 (Type)</label>
+<select class="input-field">
+<option>전체 (All)</option>
+<option>제어 (Control)</option>
+<option selected="">알람 (Alarm)</option>
+<option>시스템 (System)</option>
+</select>
+</div>
+<div class="input-group flex-1">
+<label class="input-label">장치/구역 (Device/Zone)</label>
+<div class="relative">
+<input class="input-field w-full pl-8" placeholder="검색어 입력..." type="text"/>
+<i class="fas fa-search absolute left-2.5 top-2 text-gray-400 text-xs"></i>
+</div>
+</div>
+<div class="input-group">
+<label class="input-label">사용자 (User)</label>
+<input class="input-field" placeholder="ID or Name" type="text"/>
+</div>
+</div>
+<div class="filter-row justify-between">
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-gray-100 text-gray-600 rounded text-xs font-bold border border-gray-200 hover:bg-gray-200">
+<i class="fas fa-star mr-1 text-yellow-500"></i> 중요 알람만
+                                </button>
+<div class="relative">
+<select class="input-field pl-6 text-xs bg-gray-50 border-dashed w-40">
+<option>저장된 필터 선택...</option>
+<option>최근 1시간 제어 이력</option>
+<option>야간 출입 기록</option>
+</select>
+<i class="fas fa-bookmark absolute left-2 top-2 text-blue-400 text-xs"></i>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 bg-white border border-gray-300 rounded text-xs font-medium hover:bg-gray-50">초기화</button>
+<button class="px-4 py-1.5 bg-blue-600 text-white rounded text-xs font-bold hover:bg-blue-700 shadow-sm">
+<i class="fas fa-search mr-1"></i> 조회
+                                </button>
+</div>
+</div>
+</div>
+<!-- Table Area -->
+<div class="table-container">
+<div class="table-toolbar">
+<span class="result-count">Total: 1,248 Events</span>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 bg-white border border-gray-300 rounded text-xs font-medium text-gray-600 hover:bg-gray-50 flex items-center gap-2">
+<i class="fas fa-file-csv text-green-600"></i> CSV
+                                </button>
+<button class="px-3 py-1.5 bg-white border border-gray-300 rounded text-xs font-medium text-gray-600 hover:bg-gray-50 flex items-center gap-2">
+<i class="fas fa-file-pdf text-red-600"></i> PDF
+                                </button>
+</div>
+</div>
+<div class="custom-table">
+<div class="table-header">
+<div class="header-cell">No</div>
+<div class="header-cell">Time</div>
+<div class="header-cell">Type</div>
+<div class="header-cell">Device / Zone</div>
+<div class="header-cell">Event Message</div>
+<div class="header-cell">User</div>
+<div class="header-cell">Result</div>
+</div>
+<div class="table-body">
+<div class="table-row">
+<div class="cell text-gray-400">1248</div>
+<div class="cell">15:10:05</div>
+<div class="cell"><span class="badge badge-control"><i class="fas fa-sliders-h"></i> Control</span></div>
+<div class="cell">HVAC-AHU-01</div>
+<div class="cell">Set Temperature 24.0°C</div>
+<div class="cell">Kim (Op)</div>
+<div class="cell"><span class="badge badge-success">Success</span></div>
+</div>
+<div class="table-row selected">
+<div class="cell text-gray-400">1247</div>
+<div class="cell">15:08:22</div>
+<div class="cell"><span class="badge badge-alarm"><i class="fas fa-bell"></i> Alarm</span></div>
+<div class="cell">Server Room A</div>
+<div class="cell font-bold text-red-600">High Temperature Warning (28°C)</div>
+<div class="cell">System</div>
+<div class="cell"><span class="badge badge-fail">Active</span></div>
+</div>
+<div class="table-row">
+<div class="cell text-gray-400">1246</div>
+<div class="cell">15:05:00</div>
+<div class="cell"><span class="badge badge-system"><i class="fas fa-server"></i> System</span></div>
+<div class="cell">Gateway_B1</div>
+<div class="cell">Connection Restored</div>
+<div class="cell">System</div>
+<div class="cell"><span class="badge badge-success">Normal</span></div>
+</div>
+<div class="table-row">
+<div class="cell text-gray-400">1245</div>
+<div class="cell">15:01:12</div>
+<div class="cell"><span class="badge badge-control"><i class="fas fa-sliders-h"></i> Control</span></div>
+<div class="cell">Lobby Light G1</div>
+<div class="cell">Manual ON Command</div>
+<div class="cell">Lee (Mgr)</div>
+<div class="cell"><span class="badge badge-success">Success</span></div>
+</div>
+<div class="table-row">
+<div class="cell text-gray-400">1244</div>
+<div class="cell">14:58:45</div>
+<div class="cell"><span class="badge badge-alarm"><i class="fas fa-bell"></i> Alarm</span></div>
+<div class="cell">Elevator #3</div>
+<div class="cell">Door Open Error</div>
+<div class="cell">System</div>
+<div class="cell"><span class="badge badge-fail">Active</span></div>
+</div>
+<div class="table-row">
+<div class="cell text-gray-400">1243</div>
+<div class="cell">14:55:10</div>
+<div class="cell"><span class="badge badge-system"><i class="fas fa-user-shield"></i> Access</span></div>
+<div class="cell">Main Gate</div>
+<div class="cell">Access Denied (Invalid Card)</div>
+<div class="cell">Unknown</div>
+<div class="cell"><span class="badge badge-fail">Denied</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detail Drawer -->
+<div class="detail-drawer">
+<div class="drawer-header">
+<span class="font-bold text-gray-800 text-sm">Event Details</span>
+<button class="text-gray-400 hover:text-gray-600"><i class="fas fa-times"></i></button>
+</div>
+<div class="drawer-content">
+<div class="detail-group">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-red-500"></span>
+<h3 class="font-bold text-red-600">High Temperature Warning</h3>
+</div>
+<p class="text-xs text-gray-500">ID: EVT-2026-9981</p>
+</div>
+<div class="detail-group">
+<div class="detail-label">Basic Info</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="text-xs text-gray-500">Time</div>
+<div class="text-xs font-medium">2026-03-11 15:08:22</div>
+<div class="text-xs text-gray-500">Source</div>
+<div class="text-xs font-medium">Server Room A / Temp_Sensor_01</div>
+<div class="text-xs text-gray-500">Value</div>
+<div class="text-xs font-bold text-red-500">28.5 °C (Threshold: 26.0)</div>
+</div>
+</div>
+<div class="detail-group">
+<div class="detail-label">Linked Trend (Last 1 Hour)</div>
+<div class="h-24 bg-white border border-gray-200 rounded p-1 relative">
+<canvas id="miniTrendChart"></canvas>
+</div>
+</div>
+<div class="detail-group">
+<div class="detail-label">Raw Data (JSON)</div>
+<div class="code-block">
+{
+  "evt_id": 9981,
+  "code": "ALM_HI_TEMP",
+  "src": "SRV_RM_A_T01",
+  "val": 28.5,
+  "limit": 26.0,
+  "stat": "ACTIVE",
+  "ack": false
+}
+                            </div>
+</div>
+<div class="mt-auto">
+<button class="w-full py-2 bg-blue-50 text-blue-600 border border-blue-200 rounded font-bold text-xs hover:bg-blue-100 mb-2">
+<i class="fas fa-check mr-2"></i> 알람 확인 (Acknowledge)
+                            </button>
+<button class="w-full py-2 bg-white text-gray-600 border border-gray-300 rounded font-bold text-xs hover:bg-gray-50">
+<i class="fas fa-external-link-alt mr-2"></i> 관련 화면 이동
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Callouts -->
+<div class="callout" style="top: 150px; left: 240px;">1</div>
+<div class="callout" style="top: 350px; left: 340px;">2</div>
+<div class="callout" style="top: 250px; right: 480px;">3</div>
+<div class="callout" style="bottom: 150px; left: 240px;">4</div>
+<!-- Right: Description -->
+<div class="desc-panel">
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-list-ul text-blue-600"></i>
+<span>화면 구성 요소</span>
+</div>
+<div class="desc-list">
+<div class="desc-item">
+<div class="desc-num">1</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">고급 필터바</p>
+<p class="text-xs text-gray-500">
+                                기간, 유형, 장치, 사용자 등 복합 조건을 설정하고, 자주 쓰는 필터는 프리셋으로 저장/불러오기 가능.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">2</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">이력 테이블</p>
+<p class="text-xs text-gray-500">
+                                제어/알람/시스템 이력을 통합 조회. 상태별 배지(Badge)와 행 강조를 통해 가독성 확보.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">3</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">상세 드로어 (Drawer)</p>
+<p class="text-xs text-gray-500">
+                                선택된 이력의 상세 정보(Raw Data)와 연관 트렌드 차트를 화면 전환 없이 즉시 확인.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">4</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">내보내기 (Export)</p>
+<p class="text-xs text-gray-500">
+                                필터링된 결과를 CSV 또는 PDF 리포트 형태로 다운로드하여 보고서 작성 지원.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-mouse-pointer text-blue-600"></i>
+<span>핵심 시나리오</span>
+</div>
+<div class="scenario-box">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#1. 수동 제어(Override) 원인 추적</h4>
+<div class="scenario-step">
+<i class="fas fa-filter text-blue-500 w-4"></i>
+<span>필터에서 유형='Control', 사용자='!System' 설정</span>
+</div>
+<div class="scenario-step">
+<i class="fas fa-user-tag text-green-500 w-4"></i>
+<span>특정 시간대 운영자가 실행한 수동 명령 식별</span>
+</div>
+</div>
+<div class="scenario-box mb-0">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#2. 알람-트렌드 상관 분석</h4>
+<div class="scenario-step">
+<i class="fas fa-bell text-red-500 w-4"></i>
+<span>고온 알람 발생 이력 클릭 -&gt; 드로어 열림</span>
+</div>
+<div class="scenario-step">
+<i class="fas fa-chart-line text-purple-500 w-4"></i>
+<span>미니 차트에서 알람 발생 전 온도 상승 패턴 확인</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+    // Mini Trend Chart in Drawer
+    const ctx = document.getElementById('miniTrendChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['-60m', '-50m', '-40m', '-30m', '-20m', '-10m', 'Now'],
+            datasets: [{
+                data: [22, 23, 23.5, 25, 27, 28, 28.5],
+                borderColor: '#E5484D',
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.4,
+                fill: false
+            }, {
+                // Threshold Line
+                data: [26, 26, 26, 26, 26, 26, 26],
+                borderColor: '#9ca3af',
+                borderWidth: 1,
+                borderDash: [4, 4],
+                pointRadius: 0,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: { enabled: false } },
+            scales: {
+                x: { display: false },
+                y: { display: false, min: 20, max: 30 }
+            },
+            layout: { padding: 0 }
+        }
+    });
+</script>
+</body>
+</html>

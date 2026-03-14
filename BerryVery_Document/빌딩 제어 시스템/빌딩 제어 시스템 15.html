@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>디자인 가이드 &amp; 컴포넌트</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Style */
+        .slide-header {
+            height: 120px;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            background: #ffffff;
+            z-index: 10;
+        }
+        .header-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header-number {
+            color: #2F6FED;
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            padding: 40px 80px;
+            gap: 50px;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        /* Left: Design System Board */
+        .design-system-wrapper {
+            flex: 2.2;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            position: relative;
+        }
+
+        .ds-header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f3f4f6;
+            padding-bottom: 20px;
+        }
+        .ds-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Grid Layout for Sections */
+        .ds-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 40px;
+            height: 100%;
+        }
+
+        .ds-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .section-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: #4b5563;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 4px solid #2F6FED;
+            padding-left: 10px;
+        }
+
+        /* 1. Colors */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .color-swatch {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f9fafb;
+            border: 1px solid #f3f4f6;
+        }
+        .swatch-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .swatch-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .swatch-name { font-size: 14px; font-weight: 700; color: #374151; }
+        .swatch-hex { font-size: 12px; color: #6b7280; font-family: monospace; }
+
+        /* 2. Typography */
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 12px;
+            border: 1px solid #f3f4f6;
+        }
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 8px;
+        }
+        .type-row:last-child { border-bottom: none; }
+        .type-example { color: #1f2937; }
+        .type-meta { font-size: 12px; color: #9ca3af; font-family: monospace; }
+
+        /* 3. Layout & Grid */
+        .layout-spec {
+            position: relative;
+            background: #f3f4f6;
+            height: 200px;
+            border-radius: 12px;
+            border: 2px dashed #d1d5db;
+            padding: 10px;
+            display: flex;
+        }
+        .layout-sidebar {
+            width: 80px;
+            background: #dbeafe;
+            border: 1px solid #93c5fd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e40af;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .layout-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+        }
+        .layout-appbar {
+            height: 40px;
+            background: #d1fae5;
+            border: 1px solid #6ee7b7;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #065f46;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .layout-content {
+            flex: 1;
+            background: white;
+            border: 1px solid #e5e7eb;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 4px;
+            padding: 4px;
+        }
+        .grid-col {
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* 4. Components */
+        .component-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .comp-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-width: 200px;
+        }
+        .comp-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #9ca3af;
+        }
+        .btn-row {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-primary { background: #2F6FED; color: white; }
+        .btn-outline { border: 1px solid #d1d5db; color: #374151; background: white; }
+        
+        /* Form Elements */
+        .input-sample {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 100%;
+        }
+        .toggle-switch {
+            width: 40px;
+            height: 20px;
+            background: #2F6FED;
+            border-radius: 20px;
+            position: relative;
+        }
+        .toggle-knob {
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            right: 2px;
+        }
+        
+        .badge-row {
+            display: flex;
+            gap: 8px;
+        }
+        .badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Right Panel */
+        .desc-panel {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .desc-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .desc-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .desc-item {
+            display: flex;
+            gap: 12px;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+        .desc-num {
+            width: 24px;
+            height: 24px;
+            background: #fee2e2;
+            color: #E5484D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .scenario-box {
+            background: #eff6ff;
+            border-left: 4px solid #2F6FED;
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 12px;
+        }
+        .scenario-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        /* Callouts */
+        .callout {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: #E5484D;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header -->
+<header class="slide-header">
+<div class="header-title">
+<span class="header-number">15</span>
+<span>디자인 가이드 &amp; 컴포넌트 (Design System)</span>
+</div>
+<div class="text-right">
+<p class="text-gray-500 text-sm font-medium">Building Control System UI Project</p>
+<p class="text-gray-400 text-xs">Page 15 / 15</p>
+</div>
+</header>
+<!-- Main Content -->
+<div class="content-area">
+<!-- Left: Design System Board -->
+<div class="design-system-wrapper">
+<div class="ds-header">
+<div class="ds-title">
+<i class="fas fa-swatchbook text-blue-600"></i>
+<span>WPF UI Framework Standard</span>
+</div>
+</div>
+<div class="ds-grid">
+<!-- Section 1: Color Palette -->
+<div class="ds-section">
+<div class="section-label">Color System</div>
+<div class="color-grid">
+<div class="color-swatch">
+<div class="swatch-box" style="background: #2F6FED;"></div>
+<div class="swatch-info">
+<span class="swatch-name">Primary Blue</span>
+<span class="swatch-hex">#2F6FED</span>
+</div>
+</div>
+<div class="color-swatch">
+<div class="swatch-box" style="background: #2DBE60;"></div>
+<div class="swatch-info">
+<span class="swatch-name">Success Green</span>
+<span class="swatch-hex">#2DBE60</span>
+</div>
+</div>
+<div class="color-swatch">
+<div class="swatch-box" style="background: #F5A524;"></div>
+<div class="swatch-info">
+<span class="swatch-name">Warning Orange</span>
+<span class="swatch-hex">#F5A524</span>
+</div>
+</div>
+<div class="color-swatch">
+<div class="swatch-box" style="background: #E5484D;"></div>
+<div class="swatch-info">
+<span class="swatch-name">Danger Red</span>
+<span class="swatch-hex">#E5484D</span>
+</div>
+</div>
+<div class="color-swatch">
+<div class="swatch-box" style="background: #374151;"></div>
+<div class="swatch-info">
+<span class="swatch-name">Dark Gray (Text)</span>
+<span class="swatch-hex">#374151</span>
+</div>
+</div>
+<div class="color-swatch">
+<div class="swatch-box" style="background: #F3F4F6; border: 1px solid #e5e7eb;"></div>
+<div class="swatch-info">
+<span class="swatch-name">Background</span>
+<span class="swatch-hex">#F3F4F6</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Typography -->
+<div class="ds-section">
+<div class="section-label">Typography (Segoe UI)</div>
+<div class="type-scale">
+<div class="type-row">
+<span class="type-example" style="font-size: 24px; font-weight: 800;">Heading 1</span>
+<span class="type-meta">24px / Bold / #111827</span>
+</div>
+<div class="type-row">
+<span class="type-example" style="font-size: 18px; font-weight: 700;">Heading 2</span>
+<span class="type-meta">18px / Bold / #1F2937</span>
+</div>
+<div class="type-row">
+<span class="type-example" style="font-size: 14px; font-weight: 500;">Body Text</span>
+<span class="type-meta">14px / Medium / #374151</span>
+</div>
+<div class="type-row">
+<span class="type-example" style="font-size: 12px; font-weight: 400;">Caption / Label</span>
+<span class="type-meta">12px / Regular / #6B7280</span>
+</div>
+</div>
+</div>
+<!-- Section 3: Layout & Grid -->
+<div class="ds-section">
+<div class="section-label">Layout &amp; Grid Rule</div>
+<div class="layout-spec">
+<div class="layout-sidebar">Sidebar<br/>240px</div>
+<div class="layout-main">
+<div class="layout-appbar">App Bar (64px)</div>
+<div class="layout-content">
+<!-- 12 Columns Mockup -->
+<div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+<div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+<div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+<div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+</div>
+</div>
+<div class="absolute bottom-2 right-4 text-xs font-bold text-gray-400">8pt Grid System</div>
+</div>
+</div>
+<!-- Section 4: Components -->
+<div class="ds-section">
+<div class="section-label">UI Components</div>
+<div class="component-showcase">
+<div class="comp-group">
+<div class="comp-title">Buttons</div>
+<div class="btn-row">
+<button class="btn btn-primary">Primary</button>
+<button class="btn btn-outline">Outline</button>
+</div>
+</div>
+<div class="comp-group">
+<div class="comp-title">Status Badges</div>
+<div class="badge-row">
+<span class="badge" style="background:#dcfce7; color:#166534;">Normal</span>
+<span class="badge" style="background:#fef3c7; color:#92400e;">Warning</span>
+<span class="badge" style="background:#fee2e2; color:#991b1b;">Error</span>
+</div>
+</div>
+<div class="comp-group">
+<div class="comp-title">Form Controls</div>
+<div class="flex flex-col gap-2">
+<input class="input-sample" placeholder="Input Field" type="text"/>
+<div class="flex items-center gap-3">
+<div class="toggle-switch"><div class="toggle-knob"></div></div>
+<span class="text-sm text-gray-600">Toggle Switch</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Callouts -->
+<div class="callout" style="top: 140px; left: 600px;">1</div>
+<div class="callout" style="top: 140px; right: 50px;">2</div>
+<div class="callout" style="bottom: 180px; left: 350px;">3</div>
+<div class="callout" style="bottom: 120px; right: 200px;">4</div>
+</div>
+<!-- Right: Description -->
+<div class="desc-panel">
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-list-ul text-blue-600"></i>
+<span>가이드 구성 요소</span>
+</div>
+<div class="desc-list">
+<div class="desc-item">
+<div class="desc-num">1</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">컬러 토큰 (Color Tokens)</p>
+<p class="text-xs text-gray-500">
+                                    WPF ResourceDictionary에 정의될 의미론적 컬러 변수. Primary, Success, Warning, Danger 등 상태별 표준 색상 정의.
+                                </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">2</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">타이포그래피 (Typography)</p>
+<p class="text-xs text-gray-500">
+                                    Segoe UI 기반의 계층 구조. H1~H4 및 Body 텍스트의 크기(Size), 굵기(Weight), 행간(Line-height) 규격화.
+                                </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">3</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">레이아웃 그리드 (Layout Grid)</p>
+<p class="text-xs text-gray-500">
+                                    1920x1080 해상도 기준, 좌측 내비게이션(240px)과 상단 바(64px)를 제외한 콘텐츠 영역의 12컬럼 그리드 시스템.
+                                </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">4</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">컴포넌트 라이브러리</p>
+<p class="text-xs text-gray-500">
+                                    재사용 가능한 UI 요소(버튼, 배지, 입력 폼, 토글 등)의 스타일 프리셋. 일관된 UX 제공을 위한 표준 위젯.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-mouse-pointer text-blue-600"></i>
+<span>핵심 전략</span>
+</div>
+<div class="scenario-box">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#1. ResourceDictionary 토큰화</h4>
+<div class="scenario-step">
+<i class="fas fa-code text-blue-500 w-4"></i>
+<span>모든 색상과 폰트를 XAML 리소스로 정의하여 테마 변경 용이성 확보</span>
+</div>
+<div class="scenario-step">
+<i class="fas fa-paint-brush text-green-500 w-4"></i>
+<span>StaticResource 바인딩을 통해 전역 스타일 일괄 업데이트 지원</span>
+</div>
+</div>
+<div class="scenario-box mb-0">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#2. 스타일 재사용성 극대화</h4>
+<div class="scenario-step">
+<i class="fas fa-layer-group text-purple-500 w-4"></i>
+<span>버튼, 카드의 기본 Style을 상속(BasedOn)받아 파생 컴포넌트 개발</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

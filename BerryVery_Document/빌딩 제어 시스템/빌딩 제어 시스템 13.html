@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>계정 관리 화면</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Style */
+        .slide-header {
+            height: 120px;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            background: #ffffff;
+            z-index: 10;
+        }
+        .header-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header-number {
+            color: #2F6FED;
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            padding: 40px 80px;
+            gap: 50px;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        /* Left: UI Mockup */
+        .ui-mockup-wrapper {
+            flex: 2.2;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 8px solid #374151; /* Monitor Bezel */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .app-bar {
+            height: 50px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .main-layout {
+            flex: 1;
+            display: flex;
+            background: #f3f4f6;
+            overflow: hidden;
+        }
+
+        /* Navigation Sidebar */
+        .sidebar {
+            width: 60px;
+            background: #1f2937;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+            gap: 15px;
+            z-index: 20;
+        }
+        .sidebar-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sidebar-icon:hover { background: #374151; color: white; }
+        .sidebar-icon.active { background: #2F6FED; color: white; }
+
+        /* List + Detail Layout */
+        .split-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Left List Panel */
+        .list-panel {
+            width: 380px;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+        }
+        .list-header {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .search-box {
+            position: relative;
+            margin-bottom: 12px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 10px 10px 10px 36px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #f9fafb;
+        }
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+        .filter-tags {
+            display: flex;
+            gap: 8px;
+        }
+        .filter-tag {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+        .filter-tag.active {
+            background: #eff6ff;
+            color: #2F6FED;
+        }
+
+        .user-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+        .user-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+        .user-item:hover { background: #f9fafb; }
+        .user-item.active { background: #eff6ff; border-left: 4px solid #2F6FED; }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #4b5563;
+            font-size: 14px;
+        }
+        .avatar.admin { background: #dbeafe; color: #1e40af; }
+        .avatar.operator { background: #dcfce7; color: #166534; }
+        
+        .user-info { flex: 1; }
+        .user-name { font-size: 14px; font-weight: 700; color: #1f2937; margin-bottom: 2px; }
+        .user-meta { font-size: 12px; color: #6b7280; display: flex; gap: 8px; }
+        
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #2DBE60; }
+        .status-dot.offline { background: #9ca3af; }
+        .status-dot.locked { background: #E5484D; }
+
+        /* Right Detail Panel */
+        .detail-panel {
+            flex: 1;
+            background: #f9fafb;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            overflow-y: auto;
+        }
+        
+        .profile-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .profile-main {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .profile-avatar-lg {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-details h2 { font-size: 20px; font-weight: 800; color: #111827; margin-bottom: 4px; }
+        .profile-details p { font-size: 14px; color: #6b7280; }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-primary { background: #2F6FED; color: white; border: 1px solid #2F6FED; }
+        .btn-outline { background: white; color: #374151; border: 1px solid #d1d5db; }
+        .btn-danger-outline { background: white; color: #E5484D; border: 1px solid #fee2e2; }
+        
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .section-title { font-size: 15px; font-weight: 700; color: #1f2937; }
+        
+        .form-grid {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; color: #6b7280; margin-bottom: 6px; }
+        .form-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fff;
+        }
+        .form-select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fff;
+        }
+
+        .permission-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .permission-table th {
+            text-align: left;
+            padding: 12px 20px;
+            background: #f9fafb;
+            color: #6b7280;
+            font-weight: 600;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .permission-table td {
+            padding: 12px 20px;
+            border-bottom: 1px solid #f3f4f6;
+            color: #374151;
+        }
+        .check-wrapper { display: flex; align-items: center; gap: 8px; }
+        .check-box {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+        }
+        .check-box.checked { background: #2F6FED; border-color: #2F6FED; }
+        
+        /* Badges */
+        .badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .badge-admin { background: #dbeafe; color: #1e40af; }
+        .badge-operator { background: #dcfce7; color: #166534; }
+        .badge-viewer { background: #f3f4f6; color: #4b5563; }
+
+        /* Callout Markers */
+        .callout {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: #E5484D;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            z-index: 50;
+        }
+
+        /* Right Panel */
+        .desc-panel {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .desc-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .desc-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .desc-item {
+            display: flex;
+            gap: 12px;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+        .desc-num {
+            width: 24px;
+            height: 24px;
+            background: #fee2e2;
+            color: #E5484D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .scenario-box {
+            background: #eff6ff;
+            border-left: 4px solid #2F6FED;
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 12px;
+        }
+        .scenario-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header -->
+<header class="slide-header">
+<div class="header-title">
+<span class="header-number">13</span>
+<span>계정 관리 (User &amp; Account)</span>
+</div>
+<div class="text-right">
+<p class="text-gray-500 text-sm font-medium">Building Control System UI Project</p>
+<p class="text-gray-400 text-xs">Page 13 / 15</p>
+</div>
+</header>
+<!-- Main Content -->
+<div class="content-area">
+<!-- Left: UI Mockup -->
+<div class="ui-mockup-wrapper">
+<!-- App Bar -->
+<div class="app-bar">
+<div class="flex items-center gap-4">
+<i class="fas fa-bars text-gray-500"></i>
+<span class="font-bold text-lg text-blue-600">BMS <span class="text-gray-600 font-normal text-sm">| Twin Tower A</span></span>
+</div>
+<div class="flex items-center gap-4 text-gray-500 text-sm">
+<span><i class="far fa-clock"></i> 2026-03-11 16:20:05</span>
+<div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"><i class="fas fa-users-cog"></i></div>
+</div>
+</div>
+<!-- Body -->
+<div class="main-layout">
+<!-- Nav Sidebar -->
+<div class="sidebar">
+<div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div>
+<div class="sidebar-icon"><i class="fas fa-building"></i></div>
+<div class="sidebar-icon"><i class="fas fa-sliders-h"></i></div>
+<div class="sidebar-icon"><i class="fas fa-list-alt"></i></div>
+<div class="sidebar-icon active"><i class="fas fa-user-shield"></i></div>
+<div class="sidebar-icon" style="margin-top: auto;"><i class="fas fa-cog"></i></div>
+</div>
+<!-- List + Detail Layout -->
+<div class="split-container">
+<!-- Left List Panel -->
+<div class="list-panel">
+<div class="list-header">
+<h3 class="text-lg font-bold text-gray-800 mb-3">사용자 목록</h3>
+<div class="search-box">
+<i class="fas fa-search search-icon"></i>
+<input class="search-input" placeholder="이름, ID 검색..." type="text"/>
+</div>
+<div class="filter-tags">
+<span class="filter-tag active">전체</span>
+<span class="filter-tag">관리자</span>
+<span class="filter-tag">운영자</span>
+<span class="filter-tag">잠금</span>
+</div>
+</div>
+<div class="user-list">
+<div class="user-item active">
+<div class="avatar admin">KM</div>
+<div class="user-info">
+<p class="user-name">김민수 (Kim Min-su)</p>
+<div class="user-meta">
+<span class="badge badge-admin">Admin</span>
+<span>ID: admin_kim</span>
+</div>
+</div>
+<div class="status-dot"></div>
+</div>
+<div class="user-item">
+<div class="avatar operator">JY</div>
+<div class="user-info">
+<p class="user-name">이지영 (Lee Ji-young)</p>
+<div class="user-meta">
+<span class="badge badge-operator">Operator</span>
+<span>ID: op_lee01</span>
+</div>
+</div>
+<div class="status-dot"></div>
+</div>
+<div class="user-item">
+<div class="avatar">PC</div>
+<div class="user-info">
+<p class="user-name">박철수 (Park Cheol-su)</p>
+<div class="user-meta">
+<span class="badge badge-viewer">Viewer</span>
+<span>ID: view_park</span>
+</div>
+</div>
+<div class="status-dot offline"></div>
+</div>
+<div class="user-item" style="background: #fef2f2;">
+<div class="avatar" style="background: #fee2e2; color: #991b1b;">JS</div>
+<div class="user-info">
+<p class="user-name text-gray-500">정수민 (Jung Su-min)</p>
+<div class="user-meta">
+<span class="badge badge-operator" style="opacity: 0.5;">Operator</span>
+<span>ID: op_jung</span>
+</div>
+</div>
+<div class="status-dot locked"></div>
+</div>
+</div>
+<div class="p-4 border-t border-gray-200">
+<button class="w-full py-2 bg-blue-600 text-white rounded font-bold text-sm hover:bg-blue-700">
+<i class="fas fa-plus mr-2"></i> 새 사용자 등록
+                            </button>
+</div>
+</div>
+<!-- Right Detail Panel -->
+<div class="detail-panel">
+<!-- Profile Header -->
+<div class="profile-card">
+<div class="profile-main">
+<div class="profile-avatar-lg">KM</div>
+<div class="profile-details">
+<h2>김민수 (Kim Min-su)</h2>
+<p>시스템 관리 팀 | 수석 연구원</p>
+<div class="flex gap-2 mt-2">
+<span class="text-xs text-green-600 bg-green-50 px-2 py-1 rounded font-bold border border-green-100"><i class="fas fa-check-circle mr-1"></i>Active</span>
+<span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded border border-gray-200"><i class="far fa-clock mr-1"></i>Last Login: 10분 전</span>
+</div>
+</div>
+</div>
+<div class="action-buttons">
+<button class="btn btn-outline"><i class="fas fa-key"></i> PW 초기화</button>
+<button class="btn btn-danger-outline"><i class="fas fa-lock"></i> 계정 잠금</button>
+</div>
+</div>
+<!-- Role & Permission -->
+<div class="section-card">
+<div class="section-header">
+<span class="section-title">역할 및 권한 설정 (RBAC)</span>
+<a class="text-xs text-blue-600 hover:underline" href="#"><i class="fas fa-history mr-1"></i>권한 변경 이력</a>
+</div>
+<div class="form-grid">
+<div class="form-group">
+<label>역할 템플릿 (Role Template)</label>
+<select class="form-select">
+<option selected="">System Administrator (시스템 관리자)</option>
+<option>Facility Operator (시설 운영자)</option>
+<option>Monitoring Viewer (단순 관제)</option>
+</select>
+</div>
+<div class="form-group">
+<label>담당 구역 (Assigned Zone)</label>
+<input class="form-input" readonly="" style="background: #f3f4f6; color: #6b7280;" type="text" value="전체 구역 (Global Access)"/>
+</div>
+</div>
+<div class="border-t border-gray-100">
+<table class="permission-table">
+<thead>
+<tr>
+<th>기능 모듈</th>
+<th style="width: 100px;">읽기 (R)</th>
+<th style="width: 100px;">쓰기 (W)</th>
+<th style="width: 100px;">실행 (X)</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>모니터링 (대시보드/상태)</td>
+<td><div class="check-wrapper"><div class="check-box checked"><i class="fas fa-check"></i></div></div></td>
+<td><div class="check-wrapper"><div class="check-box checked"><i class="fas fa-check"></i></div></div></td>
+<td><div class="check-wrapper"><div class="check-box" style="background:#e5e7eb; border:none;">-</div></div></td>
+<td class="text-xs text-gray-400">전체 조회 가능</td>
+</tr>
+<tr>
+<td>제어 (장비/시스템)</td>
+<td><div class="check-wrapper"><div class="check-box checked"><i class="fas fa-check"></i></div></div></td>
+<td><div class="check-wrapper"><div class="check-box checked"><i class="fas fa-check"></i></div></div></td>
+<td><div class="check-wrapper"><div class="check-box checked"><i class="fas fa-check"></i></div></div></td>
+<td class="text-xs text-gray-400">모든 제어 명령 허용</td>
+</tr>
+<tr>
+<td>사용자 관리 (계정/정책)</td>
+<td><div class="check-wrapper"><div class="check-box checked"><i class="fas fa-check"></i></div></div></td>
+<td><div class="check-wrapper"><div class="check-box checked"><i class="fas fa-check"></i></div></div></td>
+<td><div class="check-wrapper"><div class="check-box checked"><i class="fas fa-check"></i></div></div></td>
+<td class="text-xs text-gray-400">최고 관리자 전용</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Audit Log Link -->
+<div class="flex justify-end">
+<button class="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-2">
+<i class="fas fa-external-link-alt"></i> 이 사용자의 전체 활동 로그 보기
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Callouts -->
+<div class="callout" style="top: 150px; left: 300px;">1</div>
+<div class="callout" style="top: 150px; left: 630px;">2</div>
+<div class="callout" style="top: 360px; left: 630px;">3</div>
+<div class="callout" style="bottom: 150px; right: 450px;">4</div>
+<!-- Right: Description -->
+<div class="desc-panel">
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-list-ul text-blue-600"></i>
+<span>화면 구성 요소</span>
+</div>
+<div class="desc-list">
+<div class="desc-item">
+<div class="desc-num">1</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">사용자 리스트 (List Panel)</p>
+<p class="text-xs text-gray-500">
+                                시스템에 등록된 사용자를 검색하고 역할(Role) 및 상태(접속/잠금)별로 필터링하여 조회.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">2</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">프로필 상세 및 액션</p>
+<p class="text-xs text-gray-500">
+                                선택된 사용자의 기본 정보 확인 및 비밀번호 초기화, 계정 잠금/해제 등의 즉각적인 관리 액션 수행.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">3</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">역할 및 권한 매트릭스</p>
+<p class="text-xs text-gray-500">
+                                RBAC 기반의 역할 템플릿을 적용하거나, 기능별 세부 권한(Read/Write/Execute)을 개별 조정.
+                            </p>
+</div>
+</div>
+<div class="desc-item">
+<div class="desc-num">4</div>
+<div>
+<p class="font-bold text-gray-800 text-sm">감사 로그 (Audit Trail)</p>
+<p class="text-xs text-gray-500">
+                                해당 사용자의 권한 변경 이력이나 시스템 활동 로그로 연결하여 보안 감사 지원.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<div class="desc-card">
+<div class="desc-title">
+<i class="fas fa-mouse-pointer text-blue-600"></i>
+<span>핵심 시나리오</span>
+</div>
+<div class="scenario-box">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#1. 신규 오퍼레이터 생성</h4>
+<div class="scenario-step">
+<i class="fas fa-user-plus text-blue-500 w-4"></i>
+<span>'새 사용자 등록' -&gt; 기본 정보 입력</span>
+</div>
+<div class="scenario-step">
+<i class="fas fa-id-card-alt text-green-500 w-4"></i>
+<span>역할 템플릿에서 'Facility Operator' 선택 후 저장</span>
+</div>
+</div>
+<div class="scenario-box">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#2. 권한 오용 의심 계정 잠금</h4>
+<div class="scenario-step">
+<i class="fas fa-search text-gray-500 w-4"></i>
+<span>리스트에서 해당 사용자 검색 및 선택</span>
+</div>
+<div class="scenario-step">
+<i class="fas fa-lock text-red-500 w-4"></i>
+<span>'계정 잠금' 버튼 클릭 -&gt; 즉시 접속 차단</span>
+</div>
+</div>
+<div class="scenario-box mb-0">
+<h4 class="font-bold text-sm text-blue-900 mb-2">#3. 권한 변경 이력 추적</h4>
+<div class="scenario-step">
+<i class="fas fa-history text-purple-500 w-4"></i>
+<span>'권한 변경 이력' 링크 클릭</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
