@@ -15,12 +15,11 @@
     <Folder Include="Domain\" />
     <Folder Include="Converters\" />
     <Folder Include="Common\" />
-    <Folder Include="Services\" />
     <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BerryClass\BerryClass.csproj" />
+    <PackageReference Include="System.IO.Ports" Version="10.0.4" />
   </ItemGroup>
 
 </Project>

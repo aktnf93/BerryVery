@@ -1,0 +1,5 @@
+wwwroot\assets\index-COcDBgFa.css
+wwwroot\assets\index-SguGrCfz.js
+wwwroot\assets\react-CHdo91hT.svg
+wwwroot\index.html
+wwwroot\vite.svg

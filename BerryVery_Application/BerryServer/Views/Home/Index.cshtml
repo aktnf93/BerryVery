@@ -1,0 +1,27 @@
+﻿
+@model BerryServer.Controllers.User
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div>
+    <h1>Home</h1>
+    @if (ViewData["Title"] != null)
+    {
+        var title = ViewData["Title"] as string;
+        <h1>@title</h1>
+    }
+
+
+    <p>@Model.Name (@Model.Age)</p>
+
+    <p>@ViewData["ControllerIndex"]</p>
+
+    <p>@ViewBag.Status</p>
+
+    @if (TempData["Alert"] != null)
+    {
+        <script>alert('@TempData["Alert"]');</script>
+    }
+</div>
