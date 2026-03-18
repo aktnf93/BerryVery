@@ -1,0 +1,10 @@
+wwwroot\assets\index-COcDBgFa.css
+wwwroot\assets\index-SguGrCfz.js
+wwwroot\assets\react-CHdo91hT.svg
+wwwroot\index.html
+wwwroot\vite.svg
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryServer\wwwroot\assets\index-COcDBgFa.css
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryServer\wwwroot\assets\index-SguGrCfz.js
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryServer\wwwroot\assets\react-CHdo91hT.svg
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryServer\wwwroot\index.html
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryServer\wwwroot\vite.svg

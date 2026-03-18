@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BerryOperator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d39cf6a8a6b0d4b1824df6319b7003cfb6d6c7b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+074d75041506f86d843e8c64b8b30d418bbd692e")]
 [assembly: System.Reflection.AssemblyProductAttribute("BerryOperator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BerryOperator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

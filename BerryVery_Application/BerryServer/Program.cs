@@ -1,4 +1,7 @@
+using BerryServer.CommServices;
 using BerryServer.Middleware;
+using BerryServer.Repositories;
+using BerryServer.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +16,30 @@ namespace BerryServer
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // 모든 한글(UnicodeRanges.All 또는 .Hangul)을 안전하게 인코딩하도록 설정
+            builder.Services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(UnicodeRanges.All));
+
+            // _______________________________________________________________________________
+            // DI 등록 : HTTP 요청 시 생성자를 통해 내려받을 타입 등록
+            // AddSingleton : 단일 객체 내려받음
+            // AddScoped : HTTP 요청 마다 새 객체 생성해서 내려받음
+            builder.Services.AddSingleton<SocketCommService>();
+            builder.Services.AddSingleton<DatabaseCommService>();
+            builder.Services.AddScoped<DeviceRepository>();
+            builder.Services.AddScoped<DeviceService>();
+
             // builder.Services.AddControllers();
             builder.Services.AddControllersWithViews();
 
-            // 모든 한글(UnicodeRanges.All 또는 .Hangul)을 안전하게 인코딩하도록 설정
-            builder.Services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(UnicodeRanges.All));
+            // _______________________________________________________________________________
+            // ASP.NET 백그라운드 작업
+            builder.Services.AddHostedService<SocketCommService>();
+
+
+            builder.WebHost.ConfigureKestrel(o =>
+            {
+                o.ListenAnyIP(8016);
+            });
 
             var app = builder.Build();
 

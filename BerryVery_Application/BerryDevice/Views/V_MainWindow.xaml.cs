@@ -1,4 +1,5 @@
-﻿using BerryDevice.Services;
+﻿using BerryDevice.CommServices;
+using BerryDevice.Services;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
@@ -8,12 +9,17 @@ namespace BerryDevice.Views
     public partial class V_MainWindow : Window
     {
         S_SerialPort port;
+        SocketCommService s = new SocketCommService();
 
         public V_MainWindow()
         {
             InitializeComponent();
 
 
+            s.ListenerConnect("localhost", 8500);
+
+
+            /*
             void log(object sender, object e, [CallerLineNumber] int call = 0)
             {
                 Console.WriteLine("{0:HH:mm:ss.fff}\t{1}, {2}, {3}", 
@@ -25,14 +31,21 @@ namespace BerryDevice.Views
             port.DataReceived      += (sender, e) => log(sender, e);
             port.Error             += (sender, e) => log(sender, e);
             port.Connect();
+            */
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
             var data = "02aabbccddeeff03";
             var arr = Encoding.UTF8.GetBytes(data);
 
+            s.SendToListener(arr);
+
+            /*
             port.DataSend(arr);
+            */
+
         }
     }
 }

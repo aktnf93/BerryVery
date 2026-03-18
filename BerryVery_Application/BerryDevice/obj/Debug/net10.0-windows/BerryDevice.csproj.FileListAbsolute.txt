@@ -84,3 +84,11 @@ C:\Users\A\source\repos\GitHub\Git_KSH_BerryVery\BerryVery_Application\BerryDevi
 C:\Users\A\source\repos\GitHub\Git_KSH_BerryVery\BerryVery_Application\BerryDevice\obj\Debug\net10.0-windows\BerryDev.C26CE318.Up2Date
 C:\Users\A\source\repos\GitHub\Git_KSH_BerryVery\BerryVery_Application\BerryDevice\obj\Debug\net10.0-windows\BerryDevice.genruntimeconfig.cache
 C:\Users\A\source\repos\GitHub\Git_KSH_BerryVery\BerryVery_Application\BerryDevice\obj\Debug\net10.0-windows\ref\BerryDevice.dll
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryDevice\bin\Debug\net10.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryDevice\bin\Debug\net10.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryDevice\bin\Debug\net10.0-windows\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryDevice\bin\Debug\net10.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryDevice\bin\Debug\net10.0-windows\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryDevice\bin\Debug\net10.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryDevice\bin\Debug\net10.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\A\source\repos\github\git_ksh_berryvery\BerryVery_Application\BerryDevice\bin\Debug\net10.0-windows\Microsoft.Extensions.Primitives.dll
