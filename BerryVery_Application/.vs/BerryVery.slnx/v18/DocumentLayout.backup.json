@@ -3,119 +3,115 @@
   "WorkspaceRootPath": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\common\\repositorybaseex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\common\\repositorybaseex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\commservices\\databasecommservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\commservices\\databasecommservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\repositories\\devicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\repositories\\devicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\route\\api\\device\\entities\\devicesub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\route\\api\\device\\entities\\devicesub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\route\\api\\device\\entities\\devicectrl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\route\\api\\device\\entities\\devicectrl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\entities\\portentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\entities\\portentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\route\\api\\device\\entities\\devicegate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\route\\api\\device\\entities\\devicegate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24E00A19-9B83-43EE-B390-374B16894CE8}|BerryDevice\\BerryDevice.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berrydevice\\services\\socketcommservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24E00A19-9B83-43EE-B390-374B16894CE8}|BerryDevice\\BerryDevice.csproj|solutionrelative:berrydevice\\services\\socketcommservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\commservices\\socketcommservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\commservices\\socketcommservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\route\\api\\device\\entities\\deviceport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\route\\api\\device\\entities\\deviceport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 0,
+      "Orientation": 1,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 110,
+          "DockedHeight": 200,
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DatabaseCommService.cs",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\CommServices\\DatabaseCommService.cs",
-              "RelativeDocumentMoniker": "BerryServer\\CommServices\\DatabaseCommService.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\CommServices\\DatabaseCommService.cs",
-              "RelativeToolTip": "BerryServer\\CommServices\\DatabaseCommService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAoAAAAAAAAAA==",
+              "Title": "RepositoryBaseEx.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Common\\RepositoryBaseEx.cs",
+              "RelativeDocumentMoniker": "BerryServer\\Common\\RepositoryBaseEx.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Common\\RepositoryBaseEx.cs",
+              "RelativeToolTip": "BerryServer\\Common\\RepositoryBaseEx.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAqwJIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-18T08:37:07.368Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Program.cs",
-              "RelativeDocumentMoniker": "BerryServer\\Program.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Program.cs",
-              "RelativeToolTip": "BerryServer\\Program.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwBwAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-18T08:35:57.772Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PortEntity.cs",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Entities\\PortEntity.cs",
-              "RelativeDocumentMoniker": "BerryServer\\Entities\\PortEntity.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Entities\\PortEntity.cs",
-              "RelativeToolTip": "BerryServer\\Entities\\PortEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-18T08:08:25.858Z",
+              "WhenOpened": "2026-03-19T06:49:04.879Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DeviceRepository.cs",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Repositories\\DeviceRepository.cs",
-              "RelativeDocumentMoniker": "BerryServer\\Repositories\\DeviceRepository.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Repositories\\DeviceRepository.cs",
-              "RelativeToolTip": "BerryServer\\Repositories\\DeviceRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABNAAAAAAAAAA==",
+              "Title": "DatabaseCommService.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\CommServices\\DatabaseCommService.cs",
+              "RelativeDocumentMoniker": "BerryServer\\CommServices\\DatabaseCommService.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\CommServices\\DatabaseCommService.cs",
+              "RelativeToolTip": "BerryServer\\CommServices\\DatabaseCommService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-18T08:08:13.978Z",
+              "WhenOpened": "2026-03-19T06:40:51.909Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DeviceSub.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\Api\\Device\\Entities\\DeviceSub.cs",
+              "RelativeDocumentMoniker": "BerryServer\\Route\\Api\\Device\\Entities\\DeviceSub.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\Api\\Device\\Entities\\DeviceSub.cs",
+              "RelativeToolTip": "BerryServer\\Route\\Api\\Device\\Entities\\DeviceSub.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T06:32:27.132Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DeviceCtrl.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\Api\\Device\\Entities\\DeviceCtrl.cs",
+              "RelativeDocumentMoniker": "BerryServer\\Route\\Api\\Device\\Entities\\DeviceCtrl.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\Api\\Device\\Entities\\DeviceCtrl.cs",
+              "RelativeToolTip": "BerryServer\\Route\\Api\\Device\\Entities\\DeviceCtrl.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T06:29:32.86Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "SocketCommService.cs",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryDevice\\Services\\SocketCommService.cs",
-              "RelativeDocumentMoniker": "BerryDevice\\Services\\SocketCommService.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryDevice\\Services\\SocketCommService.cs",
-              "RelativeToolTip": "BerryDevice\\Services\\SocketCommService.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAA7wAoAAAAFAAAAAAAAAA==",
+              "Title": "DeviceGate.CS",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\Api\\Device\\Entities\\DeviceGate.CS",
+              "RelativeDocumentMoniker": "BerryServer\\Route\\Api\\Device\\Entities\\DeviceGate.CS",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\Api\\Device\\Entities\\DeviceGate.CS",
+              "RelativeToolTip": "BerryServer\\Route\\Api\\Device\\Entities\\DeviceGate.CS",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-18T05:35:50.993Z",
+              "WhenOpened": "2026-03-19T06:27:41.371Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "SocketCommService.cs",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\CommServices\\SocketCommService.cs",
-              "RelativeDocumentMoniker": "BerryServer\\CommServices\\SocketCommService.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\CommServices\\SocketCommService.cs",
-              "RelativeToolTip": "BerryServer\\CommServices\\SocketCommService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAiAAAAAAAAAA==",
+              "Title": "DevicePort.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\Api\\Device\\Entities\\DevicePort.cs",
+              "RelativeDocumentMoniker": "BerryServer\\Route\\Api\\Device\\Entities\\DevicePort.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\Api\\Device\\Entities\\DevicePort.cs",
+              "RelativeToolTip": "BerryServer\\Route\\Api\\Device\\Entities\\DevicePort.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T06:41:18.192Z",
+              "WhenOpened": "2026-03-19T06:26:59.668Z",
               "EditorCaption": ""
             }
           ]

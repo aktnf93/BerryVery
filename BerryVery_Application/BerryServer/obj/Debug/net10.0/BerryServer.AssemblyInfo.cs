@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BerryServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+074d75041506f86d843e8c64b8b30d418bbd692e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73e1eeda793bfbc8aeecd873416cc9490baf796a")]
 [assembly: System.Reflection.AssemblyProductAttribute("BerryServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BerryServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,202 @@
+{
+  "main": {
+    "id": "b25066cf2bf48107",
+    "type": "split",
+    "children": [
+      {
+        "id": "59d7d1b5fe9644cd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "37716b4a9bea5ee4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "기본설명.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "기본설명"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1b3afbc921135376",
+    "type": "split",
+    "children": [
+      {
+        "id": "b55103508e3f3cf7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "10e78ff90845f0a4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "파일 탐색기"
+            }
+          },
+          {
+            "id": "c911cf8fd55e4513",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "검색"
+            }
+          },
+          {
+            "id": "d52f3aa465ff5c3d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "북마크"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "right": {
+    "id": "0f6c14775ed13833",
+    "type": "split",
+    "children": [
+      {
+        "id": "de2f8df5909f3189",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b63caae2b4ca47e1",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "환영합니다!.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "환영합니다! 의 백링크"
+            }
+          },
+          {
+            "id": "1dba7f935826a67e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "환영합니다!.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "환영합니다! 의 나가는 링크"
+            }
+          },
+          {
+            "id": "8841e0076a7842a5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "태그"
+            }
+          },
+          {
+            "id": "1e778e084f7e90ac",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "모든 속성"
+            }
+          },
+          {
+            "id": "ba95ba5ceac9c18e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "환영합니다!.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "환영합니다! 의 개요"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:빠른 전환기 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 일일 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "bases:새 베이스 생성하기": false
+    }
+  },
+  "active": "37716b4a9bea5ee4",
+  "lastOpenFiles": [
+    "berry_very.js",
+    "빌딩 제어 시스템/빌딩 제어 시스템 9.html",
+    "빌딩 제어 시스템/빌딩 제어 시스템 8.html",
+    "빌딩 제어 시스템/빌딩 제어 시스템 6.html",
+    "빌딩 제어 시스템/빌딩 제어 시스템 7.html",
+    "빌딩 제어 시스템/빌딩 제어 시스템 3.html",
+    "빌딩 제어 시스템/빌딩 제어 시스템 5.html",
+    "빌딩 제어 시스템/빌딩 제어 시스템 4.html",
+    "빌딩 제어 시스템/빌딩 제어 시스템 14.html",
+    "빌딩 제어 시스템/빌딩 제어 시스템 13.html",
+    "빌딩 제어 시스템/빌딩 제어 시스템 2 - 메뉴 구조.html",
+    "기본설명.md"
+  ]
+}

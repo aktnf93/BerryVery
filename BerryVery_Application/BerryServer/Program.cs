@@ -1,7 +1,6 @@
 using BerryServer.CommServices;
 using BerryServer.Middleware;
-using BerryServer.Repositories;
-using BerryServer.Services;
+using BerryServer.Route.Api.Device;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +25,13 @@ namespace BerryServer
             builder.Services.AddSingleton<SocketCommService>();
             builder.Services.AddSingleton<DatabaseCommService>();
             builder.Services.AddScoped<DeviceRepository>();
+            //builder.Services.AddScoped<DeviceRepository>(sp =>
+            //{
+            //    return new DeviceRepository(
+            //        sp.GetRequiredService<ILogger<DeviceRepository>>(),
+            //        sp.GetRequiredService<DatabaseCommService>()
+            //    );
+            //});
             builder.Services.AddScoped<DeviceService>();
 
             // builder.Services.AddControllers();
@@ -65,8 +71,8 @@ namespace BerryServer
             // /404 경로로 시작하는 모든 요청에 대해 404 Not Found 응답을 반환
             app.MapFallback("/404/{*path}", async (HttpContext context) => TypedResults.NotFound());
 
-            // URL 매핑 실패 시 HandleFallback 메서드가 있는 MyErrorObjController로 라우팅
-            app.MapFallbackToController("HandleFallback", "MyErrorObj"); // 매칭 안되면 컨트롤러로 라우팅
+            // URL 매핑 실패 시 FallbackAction 메서드가 있는 FallbackController로 라우팅
+            app.MapFallbackToController("FallbackAction", "FallbackController");
 
             app.Run();
         }

@@ -1,26 +1,53 @@
-﻿@model BerryServer.Models.User
-
-@{
+﻿@{
     ViewData["Title"] = "Home";
 }
 
-<div>
-    <h1>Home</h1>
-    @if (ViewData["Title"] != null)
-    {
-        var title = ViewData["Title"] as string;
-        <h1>@title</h1>
-    }
+<head>
+    <title>@ViewData["Title"] - 사이트 이름</title>
+</head>
 
+<script>
+    const originalTitle = document.title;
 
-    <p>@Model.Name (@Model.Age)</p>
+    window.addEventListener("blur", () => {
+        document.title = "가지 마세요! 소식이 있어요";
+    });
 
-    <p>@ViewData["ControllerIndex"]</p>
+    window.addEventListener("focus", () => {
+        document.title = originalTitle;
+    });
 
-    <p>@ViewBag.Status</p>
+    async function checkUser() {
+        const nameInput = document.getElementById('userName').value;
 
-    @if (TempData["Alert"] != null)
-    {
-        <script>alert('@TempData["Alert"]');</script>
-    }
-</div>
+        const response = await fetch('/api/user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: nameInput })
+        });
+
+        const result = await response.json();
+        alert(result.message);
+
+        console.log(response.data);
+    };
+</script>
+
+<body>
+    <div>
+        <h1>Home</h1>
+        @if (ViewData["Title"] != null)
+        {
+            var title = ViewData["Title"] as string;
+            <h1>@title</h1>
+        }
+
+        <p>@ViewData["ControllerIndex"]</p>
+        
+        <br/>
+        <p>This is a test page for ASP.NET Core MVC.</p>
+    
+        <input type="text" id="userName" placeholder="이름을 입력하세요" />
+        <button type="button" onclick="checkUser()">확인</button>
+    </div>
+</body>

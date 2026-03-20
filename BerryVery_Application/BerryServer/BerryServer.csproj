@@ -19,15 +19,22 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
+  
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.23" />
-    <PackageReference Include="MySql.Data" Version="9.6.0" />
+    <Compile Remove="Domain\**" />
+    <Compile Remove="Utils\**" />
+    <Content Remove="Domain\**" />
+    <Content Remove="Utils\**" />
+    <EmbeddedResource Remove="Domain\**" />
+    <EmbeddedResource Remove="Utils\**" />
+    <None Remove="Domain\**" />
+    <None Remove="Utils\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\" />
-    <Folder Include="Utils\" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
+    <PackageReference Include="MySql.Data" Version="9.6.0" />
   </ItemGroup>
 
   <ItemGroup>
