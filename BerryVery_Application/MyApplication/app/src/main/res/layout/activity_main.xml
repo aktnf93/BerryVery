@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.MainActivity"
+    android:fitsSystemWindows="true"
+    >
+
+    <FrameLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#EEEEEE">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="상단 영역 (임시)" />
+    </FrameLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/main_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:name="com.example.myapplication.ui.MonitoringFragment"
+        />
+
+    <LinearLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="#F5F5F5"
+        >
+
+        <Button
+            android:text="모니터링"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:onClick="onBtnMonitoringView"/>
+
+        <Button
+            android:text="장비제어"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:onClick="onBtnControlView"/>
+
+        <Button
+            android:text="이력조회"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+             />
+
+        <Button
+            android:text="환경설정"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+             />
+    </LinearLayout>
+
+</LinearLayout>

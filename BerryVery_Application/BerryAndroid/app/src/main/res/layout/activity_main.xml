@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 가운데 영역 -->
+    <FrameLayout android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/my_button"
+            android:background="@color/design_default_color_secondary"
+            android:layout_width="300px"
+            android:layout_height="300px"
+            android:text="클릭하세요" />
+    </FrameLayout>
+
+</LinearLayout>
+
+
+    <!-- 상단 메뉴 -->
+    <!--
+<include layout="@layout/top_menu"/>
+-->
