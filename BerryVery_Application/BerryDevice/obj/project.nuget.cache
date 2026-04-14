@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CT7ra5lav44=",
+  "dgSpecHash": "lU4YO7TQEK8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryDevice\\BerryDevice.csproj",
+  "projectFilePath": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryDevice\\BerryDevice.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\A\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.5\\microsoft.extensions.configuration.abstractions.10.0.5.nupkg.sha512",
     "C:\\Users\\A\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.5\\microsoft.extensions.dependencyinjection.abstractions.10.0.5.nupkg.sha512",

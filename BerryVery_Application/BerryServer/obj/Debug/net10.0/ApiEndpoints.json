@@ -1,8 +1,24 @@
 [
   {
-    "ContainingType": "BerryServer.Controllers.DeviceController",
-    "Method": "Get",
-    "RelativePath": "api/Device",
+    "ContainingType": "BerryServer.Controllers.FallbackController",
+    "Method": "Default",
+    "RelativePath": "{url}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "url",
+        "Type": "",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BerryServer.Controllers.Api.DeviceController",
+    "Method": "GetGate",
+    "RelativePath": "api/Device/gate",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -10,9 +26,19 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BerryServer.Controllers.DeviceController",
-    "Method": "Post",
-    "RelativePath": "api/Device",
+    "ContainingType": "BerryServer.Controllers.Api.DeviceController",
+    "Method": "GetPort",
+    "RelativePath": "api/Device/port",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BerryServer.Controllers.Api.DeviceController",
+    "Method": "PostPort",
+    "RelativePath": "api/Device/port",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -26,9 +52,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BerryServer.Controllers.DeviceController",
-    "Method": "Put",
-    "RelativePath": "api/Device/{id}",
+    "ContainingType": "BerryServer.Controllers.Api.DeviceController",
+    "Method": "PutPort",
+    "RelativePath": "api/Device/port/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -47,9 +73,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BerryServer.Controllers.DeviceController",
-    "Method": "Delete",
-    "RelativePath": "api/Device/{id}",
+    "ContainingType": "BerryServer.Controllers.Api.DeviceController",
+    "Method": "DeletePort",
+    "RelativePath": "api/Device/port/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -63,9 +89,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BerryServer.Controllers.LoginController",
-    "Method": "Get",
-    "RelativePath": "api/Login",
+    "ContainingType": "BerryServer.Controllers.Api.StatusController",
+    "Method": "GetPort",
+    "RelativePath": "api/Status/status",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -73,9 +99,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BerryServer.Controllers.LoginController",
-    "Method": "Post",
-    "RelativePath": "api/Login",
+    "ContainingType": "BerryServer.Controllers.Api.StatusController",
+    "Method": "PostPort",
+    "RelativePath": "api/Status/status",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -86,19 +112,34 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "BerryServer.Controllers.LoginController",
-    "Method": "Get",
-    "RelativePath": "api/Login/{id}",
-    "HttpMethod": "GET",
+    "ContainingType": "BerryServer.Controllers.Api.StatusController",
+    "Method": "PutPort",
+    "RelativePath": "api/Status/status/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "value",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BerryServer.Controllers.Api.StatusController",
+    "Method": "DeletePort",
+    "RelativePath": "api/Status/status/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -108,63 +149,42 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BerryServer.TestController",
+    "Method": "GetName",
+    "RelativePath": "api/Test/name",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BerryServer.Controllers.Api.UserController",
+    "Method": "GetPort",
+    "RelativePath": "api/User/port",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BerryServer.Program\u002B\u003C\u003Ec",
+    "Method": "\u003CMain\u003Eb__0_1",
+    "RelativePath": "token",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.String",
+        "Type": "\u003C\u003Ef__AnonymousType2\u00603[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BerryServer.Controllers.LoginController",
-    "Method": "Put",
-    "RelativePath": "api/Login/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "value",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BerryServer.Controllers.LoginController",
-    "Method": "Delete",
-    "RelativePath": "api/Login/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
         "StatusCode": 200
       }
     ]

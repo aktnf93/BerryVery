@@ -53,7 +53,7 @@ namespace BerryDevice.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/BerryDevice;component/views/v_mainwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/BerryDevice;V1.0.0.0;component/views/v_mainwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\V_MainWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
