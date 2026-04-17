@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BerryOperator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d3b986729b0a78e3dded1991983910f8f02cee11")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2dded4871f76c35c9750f0577c5a7581d5979aeb")]
+>>>>>>> origin/main
 [assembly: System.Reflection.AssemblyProductAttribute("BerryOperator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BerryOperator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

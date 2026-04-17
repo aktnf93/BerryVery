@@ -1,8 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\",
+  "WorkspaceRootPath": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\route\\api\\device\\devicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\route\\api\\device\\devicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,14 +14,23 @@
     {
       "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+>>>>>>> origin/main
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 1,
+      "Orientation": 0,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
+<<<<<<< HEAD
           "DockedHeight": 200,
           "SelectedChildIndex": 2,
           "Children": [
@@ -62,6 +72,45 @@
               "ViewState": "AgIAABcAAAAAAAAAAAA1wBwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-26T05:48:28.808Z",
+=======
+          "DockedWidth": 293,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c6f34f0d-7ae5-4f3a-be61-fe0c21ae9eb8}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Program.cs",
+              "RelativeDocumentMoniker": "BerryServer\\Program.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Program.cs*",
+              "RelativeToolTip": "BerryServer\\Program.cs*",
+              "ViewState": "AgIAAGIAAAAAAAAAAADwv3QAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T12:36:59.151Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 101,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\appsettings.json",
+              "RelativeDocumentMoniker": "BerryServer\\appsettings.json",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\appsettings.json",
+              "RelativeToolTip": "BerryServer\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-13T11:51:23.295Z",
+>>>>>>> origin/main
               "EditorCaption": ""
             }
           ]

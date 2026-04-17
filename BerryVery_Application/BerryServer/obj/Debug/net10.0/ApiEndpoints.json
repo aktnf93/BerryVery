@@ -1,8 +1,30 @@
 [
   {
+<<<<<<< HEAD
     "ContainingType": "BerryServer.Route.Api.Status.StatusController",
     "Method": "GetPort",
     "RelativePath": "api/Status/status",
+=======
+    "ContainingType": "BerryServer.Controllers.FallbackController",
+    "Method": "Default",
+    "RelativePath": "{url}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "url",
+        "Type": "",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BerryServer.Controllers.Api.DeviceController",
+    "Method": "GetGate",
+    "RelativePath": "api/Device/gate",
+>>>>>>> origin/main
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -10,7 +32,107 @@
     "ReturnTypes": []
   },
   {
+<<<<<<< HEAD
     "ContainingType": "BerryServer.Route.Api.Status.StatusController",
+    "Method": "PostPort",
+    "RelativePath": "api/Status/status",
+=======
+    "ContainingType": "BerryServer.Controllers.Api.DeviceController",
+    "Method": "GetPort",
+    "RelativePath": "api/Device/port",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BerryServer.Controllers.Api.DeviceController",
+    "Method": "PostPort",
+    "RelativePath": "api/Device/port",
+>>>>>>> origin/main
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+<<<<<<< HEAD
+    "ContainingType": "BerryServer.Route.Api.Status.StatusController",
+    "Method": "PutPort",
+    "RelativePath": "api/Status/status/{id}",
+=======
+    "ContainingType": "BerryServer.Controllers.Api.DeviceController",
+    "Method": "PutPort",
+    "RelativePath": "api/Device/port/{id}",
+>>>>>>> origin/main
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "value",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+<<<<<<< HEAD
+    "ContainingType": "BerryServer.Route.Api.Status.StatusController",
+    "Method": "DeletePort",
+    "RelativePath": "api/Status/status/{id}",
+=======
+    "ContainingType": "BerryServer.Controllers.Api.DeviceController",
+    "Method": "DeletePort",
+    "RelativePath": "api/Device/port/{id}",
+>>>>>>> origin/main
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+<<<<<<< HEAD
+    "ContainingType": "BerryServer.Route.FallbackController",
+    "Method": "FallbackAction",
+    "RelativePath": "Fallback",
+    "HttpMethod": "",
+=======
+    "ContainingType": "BerryServer.Controllers.Api.StatusController",
+    "Method": "GetPort",
+    "RelativePath": "api/Status/status",
+    "HttpMethod": "GET",
+>>>>>>> origin/main
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+<<<<<<< HEAD
+=======
+  },
+  {
+    "ContainingType": "BerryServer.Controllers.Api.StatusController",
     "Method": "PostPort",
     "RelativePath": "api/Status/status",
     "HttpMethod": "POST",
@@ -26,7 +148,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BerryServer.Route.Api.Status.StatusController",
+    "ContainingType": "BerryServer.Controllers.Api.StatusController",
     "Method": "PutPort",
     "RelativePath": "api/Status/status/{id}",
     "HttpMethod": "PUT",
@@ -47,7 +169,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BerryServer.Route.Api.Status.StatusController",
+    "ContainingType": "BerryServer.Controllers.Api.StatusController",
     "Method": "DeletePort",
     "RelativePath": "api/Status/status/{id}",
     "HttpMethod": "DELETE",
@@ -63,13 +185,42 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BerryServer.Route.FallbackController",
-    "Method": "FallbackAction",
-    "RelativePath": "Fallback",
-    "HttpMethod": "",
+    "ContainingType": "BerryServer.TestController",
+    "Method": "GetName",
+    "RelativePath": "api/Test/name",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BerryServer.Controllers.Api.UserController",
+    "Method": "GetPort",
+    "RelativePath": "api/User/port",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BerryServer.Program\u002B\u003C\u003Ec",
+    "Method": "\u003CMain\u003Eb__0_1",
+    "RelativePath": "token",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "\u003C\u003Ef__AnonymousType2\u00603[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+>>>>>>> origin/main
   }
 ]

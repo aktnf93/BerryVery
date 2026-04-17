@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZZf3jzVfbhA=",
+  "dgSpecHash": "MxYycgUWxGY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\BerryServer.csproj",
+  "projectFilePath": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\BerryServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\A\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "C:\\Users\\A\\.nuget\\packages\\google.protobuf\\3.32.0\\google.protobuf.3.32.0.nupkg.sha512",
