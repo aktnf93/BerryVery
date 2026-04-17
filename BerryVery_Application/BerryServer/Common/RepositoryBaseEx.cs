@@ -30,8 +30,8 @@ namespace BerryServer.Common
             public string Logical { get; set; } = "AND";
         }
 
-        protected readonly ILogger<Repository> _logger;
-        protected readonly DatabaseCommService _db;
+        protected readonly ILogger<Repository> Logger;
+        protected readonly DatabaseCommService Db;
 
         public RepositoryBaseEx(ILogger<Repository> logger, DatabaseCommService db)
         {
@@ -40,8 +40,8 @@ namespace BerryServer.Common
             // var frame = stack.GetFrame(1);
             // Console.WriteLine("RepositoryBase(logger, db) > {0}, {1}:{2}", type.Name, frame.GetFileLineNumber(), frame.GetMethod().Name);
 
-            this._logger = logger;
-            this._db = db;
+            this.Logger = logger;
+            this.Db = db;
         }
 
 

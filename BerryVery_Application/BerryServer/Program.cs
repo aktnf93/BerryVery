@@ -1,11 +1,14 @@
 using BerryServer.CommServices;
 using BerryServer.Middleware;
 using BerryServer.Route.Api.Device;
+using BerryServer.Route.Api.User;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace BerryServer
 {
@@ -39,7 +42,7 @@ namespace BerryServer
 
             // _______________________________________________________________________________
             // ASP.NET 백그라운드 작업
-            builder.Services.AddHostedService<SocketCommService>();
+            // builder.Services.AddHostedService<SocketCommService>();
 
 
             builder.WebHost.ConfigureKestrel(o =>
@@ -65,14 +68,33 @@ namespace BerryServer
             // / 경로로 접근 시 예외를 발생시키는 테스트용 라우트
             app.Map("/", (HttpContext context) => throw new Exception("테스트 예외"));
 
+
+            app.Map("/my/test", (HttpContext context) =>
+            {
+                return TypedResults.Ok("ok");
+            });
+
+
             // /app 경로로 시작하는 모든 요청에 대해 wwwroot/index.html 파일을 반환
             app.MapFallbackToFile("/app/{*path}", "index.html");
 
             // /404 경로로 시작하는 모든 요청에 대해 404 Not Found 응답을 반환
             app.MapFallback("/404/{*path}", async (HttpContext context) => TypedResults.NotFound());
 
+            app.MapFallback("/405/{*path}", async () => TypedResults.NotFound());
+
+            app.MapFallback("/406/{*path}", 
+                async (HttpContext context, 
+                    DatabaseCommService db, 
+                    IConfiguration config, ILogger <Program> logger) =>
+                {
+                    logger.LogError("/406 Error");
+
+                    return TypedResults.NotFound();
+                });
+
             // URL 매핑 실패 시 FallbackAction 메서드가 있는 FallbackController로 라우팅
-            app.MapFallbackToController("FallbackAction", "FallbackController");
+            app.MapFallbackToController("FallbackAction", "Fallback");
 
             app.Run();
         }

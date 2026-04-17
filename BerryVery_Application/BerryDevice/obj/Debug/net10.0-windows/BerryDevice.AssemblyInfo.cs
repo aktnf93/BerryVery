@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BerryDevice")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+074d75041506f86d843e8c64b8b30d418bbd692e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d3b986729b0a78e3dded1991983910f8f02cee11")]
 [assembly: System.Reflection.AssemblyProductAttribute("BerryDevice")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BerryDevice")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

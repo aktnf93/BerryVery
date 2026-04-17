@@ -1,33 +1,35 @@
-﻿using MySql.Data.MySqlClient;
+﻿using BerryServer.Route.Api.Device.Entities;
+using MySql.Data.MySqlClient;
 using System.Data;
 
 namespace BerryServer.CommServices
 {
+
+    /* INSERT
+     *  var db = new S_Database();
+     *  string query = "INSERT INTO users (id, name) VALUES (@id, @name)";
+     *  var param = new Dictionary<string, object>() { {"@id", "admin"}, {"@name", "관리자"} };
+     *  db.SetCommand(query, param);
+     * 
+     */
+
+    /* SELECT
+     *  var db = new S_Database();
+     *  string query = "SELECT * FROM users WHERE id = @id";
+     *  var param = new Dictionary<string, object>() { {"@id", "admin"} };
+     *  DataTable dt = db.GetTable(query, param);
+     */
+
     public class DatabaseCommService
     {
-        public string connStr { private get; set; }
-            = "Server=localhost;UserId=root;Password=1111;Database=berry_very;";
+        private string _connStr;
 
-        /* INSERT
-         *  var db = new S_Database();
-         *  string query = "INSERT INTO users (id, name) VALUES (@id, @name)";
-         *  var param = new Dictionary<string, object>() { {"@id", "admin"}, {"@name", "관리자"} };
-         *  db.SetCommand(query, param);
-         * 
-         */
-
-        /* SELECT
-         *  var db = new S_Database();
-         *  string query = "SELECT * FROM users WHERE id = @id";
-         *  var param = new Dictionary<string, object>() { {"@id", "admin"} };
-         *  DataTable dt = db.GetTable(query, param);
-         */
-
-        public DatabaseCommService()
+        public DatabaseCommService(IConfiguration config)
         {
-            Console.WriteLine("DatabaseCommService");
-        }
+            _connStr = config.GetConnectionString("Default") ?? string.Empty;
 
+            Console.WriteLine("DatabaseCommService > {0}", _connStr);
+        }
 
         private MySqlCommand CreateCommand(MySqlConnection conn, string query, Dictionary<string, object> param = null)
         {
@@ -48,7 +50,7 @@ namespace BerryServer.CommServices
         {
             int result = 0;
 
-            using (var conn = new MySqlConnection(connStr))
+            using (var conn = new MySqlConnection(this._connStr))
             {
                 conn.Open();
 
@@ -61,11 +63,34 @@ namespace BerryServer.CommServices
             return result;
         }
 
-        public DataTable GetTable(string query, Dictionary<string, object> param = null)
+        public List<T> GetCommand<T>(string query, Func<MySqlDataReader, T> map, Dictionary<string, object> param = null)
+        {
+            var result = new List<T>();
+
+            using (var conn = new MySqlConnection(this._connStr))
+            {
+                conn.Open();
+
+                using (var cmd = CreateCommand(conn, query, param))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(map(reader));
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private DataTable GetTable(string query, Dictionary<string, object> param = null)
         {
             DataTable dt = new DataTable();
 
-            using (var conn = new MySqlConnection(connStr))
+            using (var conn = new MySqlConnection(this._connStr))
             {
                 conn.Open();
 

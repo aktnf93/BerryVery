@@ -1,8 +1,11 @@
 ﻿using BerryServer.Common;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace BerryServer.Route.Api.Device
 {
+
+
     /// <summary>
     /// - api/device/port <br/>
     /// - api/device/gate <br/>
@@ -10,12 +13,37 @@ namespace BerryServer.Route.Api.Device
     /// - api/device/sub
     /// </summary>
     [Route("api/[controller]")]
-    [ApiController]
+    //[ApiController]
     public class DeviceController : ControllerBaseEx<DeviceController, DeviceService>
     {
         public DeviceController(ILogger<DeviceController> logger, DeviceService service) : base(logger, service)
         {
         }
+
+
+        public class Model
+        {
+            public string Name { get; set; } = string.Empty;
+        }
+
+
+        [HttpGet("view")]
+        public IActionResult GetDevice([FromBody] object data)
+        {
+            Console.WriteLine($"HTTP > FromBody={data}");
+            return base.Ok();
+        }
+
+
+
+
+
+
+
+
+
+
+
 
         [HttpGet("port")]
         public IActionResult GetPort()

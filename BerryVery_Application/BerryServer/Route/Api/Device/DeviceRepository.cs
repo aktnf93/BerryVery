@@ -4,6 +4,8 @@ using BerryServer.Route.Api.Device.Entities;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace BerryServer.Route.Api.Device
 {
@@ -13,38 +15,32 @@ namespace BerryServer.Route.Api.Device
         {
         }
 
-        public List<DevicePort> GetDevicePort(DevicePort para = null)
+        public List<DevicePort> GetDevicePort()
         {
             var sql = "SELECT * FROM tb_device_port WHERE 1 = 1";
-            var param = new Dictionary<string, object>();
 
-            if (para is not null)
-            {
-                if (para.Id > 0)
+            var result = base.Db.GetCommand<DevicePort>(sql, (r =>
                 {
-                    sql += " AND id = @id";
-                    param.Add("@id", para.Id);
-                }
-            }
+                    try
+                    {
+                        var data = r.GetInt32("test");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
 
-            var tb = base._db.GetTable(sql, param);
-            var list = new List<DevicePort>();
+                    return new DevicePort()
+                    {
+                        Id = Convert.ToUInt32(r["port_id"]),
+                        Name = Convert.ToString(r["port_name"]) ?? string.Empty,
+                        Type = Convert.ToUInt32(r["port_type"]),
+                        Address = Convert.ToString(r["port_address"]) ?? string.Empty,
+                        Status = Convert.ToUInt32(r["port_status"])
+                    };
+                }));
 
-            for (int i = 0; i < tb.Rows.Count; i++)
-            {
-                var row = tb.Rows[i];
-
-                list.Add(new DevicePort()
-                {
-                    Id = Convert.ToInt32(row["id"]),
-                    Name = Convert.ToString(row["name"]),
-                    Type = Convert.ToInt32(row["type"]),
-                    Address = Convert.ToString(row["address"]),
-                    Status = Convert.ToInt32(row["status"])
-                });
-            }
-
-            return list;
+            return result;
         }
 
         public int PortAdd(DevicePort para)
@@ -55,27 +51,29 @@ namespace BerryServer.Route.Api.Device
                     type = @type, 
                     address = @address, 
                     status = @status";
-            var param = new Dictionary<string, object>();
-            param.Add("@name", para.Name);
-            param.Add("@type", para.Type);
-            param.Add("@address", para.Address);
-            param.Add("@status", para.Status);
+            var param = new Dictionary<string, object>
+            {
+                { "@name", para.Name },
+                { "@type", para.Type },
+                { "@address", para.Address },
+                { "@status", para.Status }
+            };
 
-            base._logger.LogInformation(Regex.Replace(sql, @"\s+", " ").Trim());
+            base.Logger.LogInformation(Regex.Replace(sql, @"\s+", " ").Trim());
 
-            var resultId = base._db.SetCommand(sql, param);
+            var resultId = base.Db.SetCommand(sql, param);
 
             return resultId;
         }
 
-        public object PortUpdate(object obj)
+        public int PortUpdate(object obj)
         {
-            return "";
+            return 1;
         }
 
-        public object PortDelete(int id)
+        public int PortDelete(int id)
         {
-            return "";
+            return 1;
         }
     }
 }

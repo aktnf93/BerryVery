@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="BerrDeviceSimulator/BerrDeviceSimulator.csproj" Id="d20786d2-4f25-444d-b626-706834406bb0" />
   <Project Path="BerryDevice/BerryDevice.csproj" Id="24e00a19-9b83-43ee-b390-374b16894ce8" />
   <Project Path="BerryMonitor/berrymonitor.esproj">
     <Build />

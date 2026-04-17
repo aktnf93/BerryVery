@@ -5,6 +5,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\route\\api\\device\\devicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\route\\api\\device\\devicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\route\\fallbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\route\\fallbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +22,35 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Program.cs",
+              "RelativeDocumentMoniker": "BerryServer\\Program.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Program.cs",
+              "RelativeToolTip": "BerryServer\\Program.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAQwEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T06:18:10.47Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FallbackController.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\FallbackController.cs",
+              "RelativeDocumentMoniker": "BerryServer\\Route\\FallbackController.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\FallbackController.cs",
+              "RelativeToolTip": "BerryServer\\Route\\FallbackController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T09:54:29.295Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,9 +59,9 @@
               "RelativeDocumentMoniker": "BerryServer\\Route\\Api\\Device\\DeviceController.cs",
               "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\Api\\Device\\DeviceController.cs",
               "RelativeToolTip": "BerryServer\\Route\\Api\\Device\\DeviceController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-19T08:45:46.471Z",
+              "WhenOpened": "2026-03-26T05:48:28.808Z",
               "EditorCaption": ""
             }
           ]
