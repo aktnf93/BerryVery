@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Gozk886aRXg=",
+  "dgSpecHash": "HQb+NkC9d80=",
   "success": true,
-  "projectFilePath": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerrDeviceSimulator\\BerrDeviceSimulator.csproj",
+  "projectFilePath": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerrDeviceSimulator\\BerrDeviceSimulator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\A\\.nuget\\packages\\runtime.android-arm.runtime.native.system.io.ports\\10.0.5\\runtime.android-arm.runtime.native.system.io.ports.10.0.5.nupkg.sha512",
     "C:\\Users\\A\\.nuget\\packages\\runtime.android-arm64.runtime.native.system.io.ports\\10.0.5\\runtime.android-arm64.runtime.native.system.io.ports.10.0.5.nupkg.sha512",

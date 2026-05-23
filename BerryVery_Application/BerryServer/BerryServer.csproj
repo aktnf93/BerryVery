@@ -7,46 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\assets\index-COcDBgFa.css" />
-    <Content Remove="wwwroot\assets\index-SguGrCfz.js" />
-    <Content Remove="wwwroot\assets\react-CHdo91hT.svg" />
-    <Content Remove="wwwroot\index.html" />
-    <Content Remove="wwwroot\vite.svg" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
+    <PackageReference Include="MySql.Data" Version="9.6.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
   </ItemGroup>
-  
+
+  <!-- 빌드 시 wwwroot 내용 포함 -->
   <ItemGroup>
     <Content Include="wwwroot\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Compile Remove="Domain\**" />
-    <Compile Remove="Utils\**" />
-    <Content Remove="Domain\**" />
-    <Content Remove="Utils\**" />
-    <EmbeddedResource Remove="Domain\**" />
-    <EmbeddedResource Remove="Utils\**" />
-    <None Remove="Domain\**" />
-    <None Remove="Utils\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
-    <PackageReference Include="MySql.Data" Version="9.6.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\assets\index-COcDBgFa.css" />
-    <None Include="wwwroot\assets\index-SguGrCfz.js" />
-    <None Include="wwwroot\assets\react-CHdo91hT.svg" />
-    <None Include="wwwroot\index.html" />
-    <None Include="wwwroot\vite.svg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Common\" />
   </ItemGroup>
 
 </Project>

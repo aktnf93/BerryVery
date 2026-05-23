@@ -3,21 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\",
   "Documents": [
     {
-<<<<<<< HEAD
-      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\route\\api\\device\\devicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\route\\api\\device\\devicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\domain\\entities\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\domain\\entities\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\route\\fallbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\route\\fallbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-=======
-      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\controllers\\api\\devicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\controllers\\api\\devicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
->>>>>>> origin/main
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\domain\\entities\\imapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\domain\\entities\\imapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\infrastructure\\data\\databaseconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\infrastructure\\data\\databaseconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\api\\controllers\\roomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\api\\controllers\\roomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berryserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB93CEC7-82C4-42B8-A863-19F91914DE47}|BerryServer\\BerryServer.csproj|solutionrelative:berryserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3801DBC3-9E54-1182-DAFF-CF4E3FAD8AE5}|BerryMonitor\\berrymonitor.esproj|c:\\users\\a\\source\\repos\\github\\git_ksh_berryvery\\berryvery_application\\berrymonitor\\vite.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{3801DBC3-9E54-1182-DAFF-CF4E3FAD8AE5}|BerryMonitor\\berrymonitor.esproj|solutionrelative:berrymonitor\\vite.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,80 +37,107 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-<<<<<<< HEAD
-          "DockedHeight": 200,
-          "SelectedChildIndex": 2,
-=======
-          "DockedWidth": 293,
-          "SelectedChildIndex": 1,
->>>>>>> origin/main
+          "DockedWidth": 294,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{c6f34f0d-7ae5-4f3a-be61-fe0c21ae9eb8}"
-            },
+            }
+          ]
+        },
+        {
+          "DockedWidth": 422,
+          "SelectedChildIndex": 2,
+          "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Program.cs",
-              "RelativeDocumentMoniker": "BerryServer\\Program.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Program.cs",
-              "RelativeToolTip": "BerryServer\\Program.cs",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAQwEcAAAAAAAAAAAAAAA==",
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Domain\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "BerryServer\\Domain\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Domain\\Entities\\User.cs",
+              "RelativeToolTip": "BerryServer\\Domain\\Entities\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-26T06:18:10.47Z",
-              "IsPinned": true,
+              "WhenOpened": "2026-05-23T01:42:32.857Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FallbackController.cs",
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\FallbackController.cs",
-              "RelativeDocumentMoniker": "BerryServer\\Route\\FallbackController.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\FallbackController.cs",
-              "RelativeToolTip": "BerryServer\\Route\\FallbackController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAUAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "DatabaseConnection.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Infrastructure\\Data\\DatabaseConnection.cs",
+              "RelativeDocumentMoniker": "BerryServer\\Infrastructure\\Data\\DatabaseConnection.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Infrastructure\\Data\\DatabaseConnection.cs",
+              "RelativeToolTip": "BerryServer\\Infrastructure\\Data\\DatabaseConnection.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAjwI0AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T09:54:29.295Z",
+              "WhenOpened": "2026-05-23T01:41:54.134Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DeviceController.cs",
-<<<<<<< HEAD
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\Api\\Device\\DeviceController.cs",
-              "RelativeDocumentMoniker": "BerryServer\\Route\\Api\\Device\\DeviceController.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\github\\git_ksh_berryvery\\BerryVery_Application\\BerryServer\\Route\\Api\\Device\\DeviceController.cs",
-              "RelativeToolTip": "BerryServer\\Route\\Api\\Device\\DeviceController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Title": "Room.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Domain\\Entities\\Room.cs",
+              "RelativeDocumentMoniker": "BerryServer\\Domain\\Entities\\Room.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Domain\\Entities\\Room.cs",
+              "RelativeToolTip": "BerryServer\\Domain\\Entities\\Room.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-26T05:48:28.808Z",
-=======
-              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Controllers\\Api\\DeviceController.cs",
-              "RelativeDocumentMoniker": "BerryServer\\Controllers\\Api\\DeviceController.cs",
-              "ToolTip": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Controllers\\Api\\DeviceController.cs",
-              "RelativeToolTip": "BerryServer\\Controllers\\Api\\DeviceController.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T13:18:57.505Z",
+              "WhenOpened": "2026-05-23T01:41:08.365Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "IMapper.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Domain\\Entities\\IMapper.cs",
+              "RelativeDocumentMoniker": "BerryServer\\Domain\\Entities\\IMapper.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Domain\\Entities\\IMapper.cs",
+              "RelativeToolTip": "BerryServer\\Domain\\Entities\\IMapper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T01:40:30.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RoomController.cs",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Api\\Controllers\\RoomController.cs",
+              "RelativeDocumentMoniker": "BerryServer\\Api\\Controllers\\RoomController.cs",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Api\\Controllers\\RoomController.cs",
+              "RelativeToolTip": "BerryServer\\Api\\Controllers\\RoomController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T16:12:45.47Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "vite.config.js",
+              "DocumentMoniker": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\berrymonitor\\vite.config.js",
+              "RelativeDocumentMoniker": "berrymonitor\\vite.config.js",
+              "ToolTip": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\berrymonitor\\vite.config.js",
+              "RelativeToolTip": "berrymonitor\\vite.config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-05-22T14:57:56.572Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Program.cs",
               "RelativeDocumentMoniker": "BerryServer\\Program.cs",
               "ToolTip": "C:\\Users\\A\\source\\repos\\GitHub\\Git_KSH_BerryVery\\BerryVery_Application\\BerryServer\\Program.cs",
               "RelativeToolTip": "BerryServer\\Program.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAADwv3UAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADQAAAAAAAAAAAAQwFIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-08T12:36:59.151Z",
->>>>>>> origin/main
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-22T14:38:41.342Z"
             }
           ]
         }
